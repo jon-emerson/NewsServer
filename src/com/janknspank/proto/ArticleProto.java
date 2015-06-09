@@ -452,6 +452,51 @@ public final class ArticleProto {
      * </pre>
      */
     double getScore();
+
+    // repeated .Video video = 26;
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    java.util.List<com.janknspank.proto.ArticleProto.Video> 
+        getVideoList();
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    com.janknspank.proto.ArticleProto.Video getVideo(int index);
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    int getVideoCount();
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    java.util.List<? extends com.janknspank.proto.ArticleProto.VideoOrBuilder> 
+        getVideoOrBuilderList();
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    com.janknspank.proto.ArticleProto.VideoOrBuilder getVideoOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code Article}
@@ -650,6 +695,14 @@ public final class ArticleProto {
               reasonIndustryCode_ = input.readInt32();
               break;
             }
+            case 210: {
+              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+                video_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.Video>();
+                mutable_bitField0_ |= 0x02000000;
+              }
+              video_.add(input.readMessage(com.janknspank.proto.ArticleProto.Video.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -672,6 +725,9 @@ public final class ArticleProto {
         }
         if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
           dedupingStems_ = new com.google.protobuf.UnmodifiableLazyStringList(dedupingStems_);
+        }
+        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+          video_ = java.util.Collections.unmodifiableList(video_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1623,6 +1679,62 @@ public final class ArticleProto {
       return score_;
     }
 
+    // repeated .Video video = 26;
+    public static final int VIDEO_FIELD_NUMBER = 26;
+    private java.util.List<com.janknspank.proto.ArticleProto.Video> video_;
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    public java.util.List<com.janknspank.proto.ArticleProto.Video> getVideoList() {
+      return video_;
+    }
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    public java.util.List<? extends com.janknspank.proto.ArticleProto.VideoOrBuilder> 
+        getVideoOrBuilderList() {
+      return video_;
+    }
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    public int getVideoCount() {
+      return video_.size();
+    }
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    public com.janknspank.proto.ArticleProto.Video getVideo(int index) {
+      return video_.get(index);
+    }
+    /**
+     * <code>repeated .Video video = 26;</code>
+     *
+     * <pre>
+     * Any videos (YouTube or MP4s) we found in the article.
+     * </pre>
+     */
+    public com.janknspank.proto.ArticleProto.VideoOrBuilder getVideoOrBuilder(
+        int index) {
+      return video_.get(index);
+    }
+
     private void initFields() {
       urlId_ = "";
       url_ = "";
@@ -1649,6 +1761,7 @@ public final class ArticleProto {
       oldestHotDuplicateTime_ = 0L;
       hotCount_ = 0;
       score_ = 0D;
+      video_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1736,6 +1849,9 @@ public final class ArticleProto {
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeInt32(25, reasonIndustryCode_);
+      }
+      for (int i = 0; i < video_.size(); i++) {
+        output.writeMessage(26, video_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1856,6 +1972,10 @@ public final class ArticleProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(25, reasonIndustryCode_);
       }
+      for (int i = 0; i < video_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(26, video_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1967,6 +2087,7 @@ public final class ArticleProto {
           getKeywordFieldBuilder();
           getSocialEngagementFieldBuilder();
           getFeatureFieldBuilder();
+          getVideoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2037,6 +2158,12 @@ public final class ArticleProto {
         bitField0_ = (bitField0_ & ~0x00800000);
         score_ = 0D;
         bitField0_ = (bitField0_ & ~0x01000000);
+        if (videoBuilder_ == null) {
+          video_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x02000000);
+        } else {
+          videoBuilder_.clear();
+        }
         return this;
       }
 
@@ -2184,6 +2311,15 @@ public final class ArticleProto {
           to_bitField0_ |= 0x00080000;
         }
         result.score_ = score_;
+        if (videoBuilder_ == null) {
+          if (((bitField0_ & 0x02000000) == 0x02000000)) {
+            video_ = java.util.Collections.unmodifiableList(video_);
+            bitField0_ = (bitField0_ & ~0x02000000);
+          }
+          result.video_ = video_;
+        } else {
+          result.video_ = videoBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2375,6 +2511,32 @@ public final class ArticleProto {
         }
         if (other.hasScore()) {
           setScore(other.getScore());
+        }
+        if (videoBuilder_ == null) {
+          if (!other.video_.isEmpty()) {
+            if (video_.isEmpty()) {
+              video_ = other.video_;
+              bitField0_ = (bitField0_ & ~0x02000000);
+            } else {
+              ensureVideoIsMutable();
+              video_.addAll(other.video_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.video_.isEmpty()) {
+            if (videoBuilder_.isEmpty()) {
+              videoBuilder_.dispose();
+              videoBuilder_ = null;
+              video_ = other.video_;
+              bitField0_ = (bitField0_ & ~0x02000000);
+              videoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getVideoFieldBuilder() : null;
+            } else {
+              videoBuilder_.addAllMessages(other.video_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4509,6 +4671,318 @@ public final class ArticleProto {
         score_ = 0D;
         onChanged();
         return this;
+      }
+
+      // repeated .Video video = 26;
+      private java.util.List<com.janknspank.proto.ArticleProto.Video> video_ =
+        java.util.Collections.emptyList();
+      private void ensureVideoIsMutable() {
+        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
+          video_ = new java.util.ArrayList<com.janknspank.proto.ArticleProto.Video>(video_);
+          bitField0_ |= 0x02000000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.ArticleProto.Video, com.janknspank.proto.ArticleProto.Video.Builder, com.janknspank.proto.ArticleProto.VideoOrBuilder> videoBuilder_;
+
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public java.util.List<com.janknspank.proto.ArticleProto.Video> getVideoList() {
+        if (videoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(video_);
+        } else {
+          return videoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public int getVideoCount() {
+        if (videoBuilder_ == null) {
+          return video_.size();
+        } else {
+          return videoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public com.janknspank.proto.ArticleProto.Video getVideo(int index) {
+        if (videoBuilder_ == null) {
+          return video_.get(index);
+        } else {
+          return videoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder setVideo(
+          int index, com.janknspank.proto.ArticleProto.Video value) {
+        if (videoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureVideoIsMutable();
+          video_.set(index, value);
+          onChanged();
+        } else {
+          videoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder setVideo(
+          int index, com.janknspank.proto.ArticleProto.Video.Builder builderForValue) {
+        if (videoBuilder_ == null) {
+          ensureVideoIsMutable();
+          video_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          videoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder addVideo(com.janknspank.proto.ArticleProto.Video value) {
+        if (videoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureVideoIsMutable();
+          video_.add(value);
+          onChanged();
+        } else {
+          videoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder addVideo(
+          int index, com.janknspank.proto.ArticleProto.Video value) {
+        if (videoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureVideoIsMutable();
+          video_.add(index, value);
+          onChanged();
+        } else {
+          videoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder addVideo(
+          com.janknspank.proto.ArticleProto.Video.Builder builderForValue) {
+        if (videoBuilder_ == null) {
+          ensureVideoIsMutable();
+          video_.add(builderForValue.build());
+          onChanged();
+        } else {
+          videoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder addVideo(
+          int index, com.janknspank.proto.ArticleProto.Video.Builder builderForValue) {
+        if (videoBuilder_ == null) {
+          ensureVideoIsMutable();
+          video_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          videoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder addAllVideo(
+          java.lang.Iterable<? extends com.janknspank.proto.ArticleProto.Video> values) {
+        if (videoBuilder_ == null) {
+          ensureVideoIsMutable();
+          super.addAll(values, video_);
+          onChanged();
+        } else {
+          videoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder clearVideo() {
+        if (videoBuilder_ == null) {
+          video_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x02000000);
+          onChanged();
+        } else {
+          videoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public Builder removeVideo(int index) {
+        if (videoBuilder_ == null) {
+          ensureVideoIsMutable();
+          video_.remove(index);
+          onChanged();
+        } else {
+          videoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public com.janknspank.proto.ArticleProto.Video.Builder getVideoBuilder(
+          int index) {
+        return getVideoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public com.janknspank.proto.ArticleProto.VideoOrBuilder getVideoOrBuilder(
+          int index) {
+        if (videoBuilder_ == null) {
+          return video_.get(index);  } else {
+          return videoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public java.util.List<? extends com.janknspank.proto.ArticleProto.VideoOrBuilder> 
+           getVideoOrBuilderList() {
+        if (videoBuilder_ != null) {
+          return videoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(video_);
+        }
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public com.janknspank.proto.ArticleProto.Video.Builder addVideoBuilder() {
+        return getVideoFieldBuilder().addBuilder(
+            com.janknspank.proto.ArticleProto.Video.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public com.janknspank.proto.ArticleProto.Video.Builder addVideoBuilder(
+          int index) {
+        return getVideoFieldBuilder().addBuilder(
+            index, com.janknspank.proto.ArticleProto.Video.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Video video = 26;</code>
+       *
+       * <pre>
+       * Any videos (YouTube or MP4s) we found in the article.
+       * </pre>
+       */
+      public java.util.List<com.janknspank.proto.ArticleProto.Video.Builder> 
+           getVideoBuilderList() {
+        return getVideoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.janknspank.proto.ArticleProto.Video, com.janknspank.proto.ArticleProto.Video.Builder, com.janknspank.proto.ArticleProto.VideoOrBuilder> 
+          getVideoFieldBuilder() {
+        if (videoBuilder_ == null) {
+          videoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.janknspank.proto.ArticleProto.Video, com.janknspank.proto.ArticleProto.Video.Builder, com.janknspank.proto.ArticleProto.VideoOrBuilder>(
+                  video_,
+                  ((bitField0_ & 0x02000000) == 0x02000000),
+                  getParentForChildren(),
+                  isClean());
+          video_ = null;
+        }
+        return videoBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:Article)
@@ -7416,6 +7890,951 @@ public final class ArticleProto {
     // @@protoc_insertion_point(class_scope:ArticleFeature)
   }
 
+  public interface VideoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string type = 1;
+    /**
+     * <code>optional string type = 1;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>optional string type = 1;</code>
+     */
+    java.lang.String getType();
+    /**
+     * <code>optional string type = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTypeBytes();
+
+    // optional string youtube_url = 2;
+    /**
+     * <code>optional string youtube_url = 2;</code>
+     */
+    boolean hasYoutubeUrl();
+    /**
+     * <code>optional string youtube_url = 2;</code>
+     */
+    java.lang.String getYoutubeUrl();
+    /**
+     * <code>optional string youtube_url = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getYoutubeUrlBytes();
+
+    // optional string video_source = 3;
+    /**
+     * <code>optional string video_source = 3;</code>
+     */
+    boolean hasVideoSource();
+    /**
+     * <code>optional string video_source = 3;</code>
+     */
+    java.lang.String getVideoSource();
+    /**
+     * <code>optional string video_source = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getVideoSourceBytes();
+
+    // optional int32 width_px = 4;
+    /**
+     * <code>optional int32 width_px = 4;</code>
+     */
+    boolean hasWidthPx();
+    /**
+     * <code>optional int32 width_px = 4;</code>
+     */
+    int getWidthPx();
+
+    // optional int32 height_px = 5;
+    /**
+     * <code>optional int32 height_px = 5;</code>
+     */
+    boolean hasHeightPx();
+    /**
+     * <code>optional int32 height_px = 5;</code>
+     */
+    int getHeightPx();
+  }
+  /**
+   * Protobuf type {@code Video}
+   */
+  public static final class Video extends
+      com.google.protobuf.GeneratedMessage
+      implements VideoOrBuilder {
+    // Use Video.newBuilder() to construct.
+    private Video(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Video(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Video defaultInstance;
+    public static Video getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Video getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Video(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              type_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              youtubeUrl_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              videoSource_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              widthPx_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              heightPx_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.janknspank.proto.ArticleProto.internal_static_Video_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.janknspank.proto.ArticleProto.internal_static_Video_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.janknspank.proto.ArticleProto.Video.class, com.janknspank.proto.ArticleProto.Video.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Video> PARSER =
+        new com.google.protobuf.AbstractParser<Video>() {
+      public Video parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Video(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Video> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private java.lang.Object type_;
+    /**
+     * <code>optional string type = 1;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string type = 1;</code>
+     */
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          type_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string type = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string youtube_url = 2;
+    public static final int YOUTUBE_URL_FIELD_NUMBER = 2;
+    private java.lang.Object youtubeUrl_;
+    /**
+     * <code>optional string youtube_url = 2;</code>
+     */
+    public boolean hasYoutubeUrl() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string youtube_url = 2;</code>
+     */
+    public java.lang.String getYoutubeUrl() {
+      java.lang.Object ref = youtubeUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          youtubeUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string youtube_url = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getYoutubeUrlBytes() {
+      java.lang.Object ref = youtubeUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        youtubeUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string video_source = 3;
+    public static final int VIDEO_SOURCE_FIELD_NUMBER = 3;
+    private java.lang.Object videoSource_;
+    /**
+     * <code>optional string video_source = 3;</code>
+     */
+    public boolean hasVideoSource() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string video_source = 3;</code>
+     */
+    public java.lang.String getVideoSource() {
+      java.lang.Object ref = videoSource_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          videoSource_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string video_source = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getVideoSourceBytes() {
+      java.lang.Object ref = videoSource_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        videoSource_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 width_px = 4;
+    public static final int WIDTH_PX_FIELD_NUMBER = 4;
+    private int widthPx_;
+    /**
+     * <code>optional int32 width_px = 4;</code>
+     */
+    public boolean hasWidthPx() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 width_px = 4;</code>
+     */
+    public int getWidthPx() {
+      return widthPx_;
+    }
+
+    // optional int32 height_px = 5;
+    public static final int HEIGHT_PX_FIELD_NUMBER = 5;
+    private int heightPx_;
+    /**
+     * <code>optional int32 height_px = 5;</code>
+     */
+    public boolean hasHeightPx() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 height_px = 5;</code>
+     */
+    public int getHeightPx() {
+      return heightPx_;
+    }
+
+    private void initFields() {
+      type_ = "";
+      youtubeUrl_ = "";
+      videoSource_ = "";
+      widthPx_ = 0;
+      heightPx_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getYoutubeUrlBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getVideoSourceBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, widthPx_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, heightPx_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getYoutubeUrlBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getVideoSourceBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, widthPx_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, heightPx_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.janknspank.proto.ArticleProto.Video parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.janknspank.proto.ArticleProto.Video prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Video}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.janknspank.proto.ArticleProto.VideoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.janknspank.proto.ArticleProto.internal_static_Video_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.janknspank.proto.ArticleProto.internal_static_Video_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.janknspank.proto.ArticleProto.Video.class, com.janknspank.proto.ArticleProto.Video.Builder.class);
+      }
+
+      // Construct using com.janknspank.proto.ArticleProto.Video.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        type_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        youtubeUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        videoSource_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        widthPx_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        heightPx_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.janknspank.proto.ArticleProto.internal_static_Video_descriptor;
+      }
+
+      public com.janknspank.proto.ArticleProto.Video getDefaultInstanceForType() {
+        return com.janknspank.proto.ArticleProto.Video.getDefaultInstance();
+      }
+
+      public com.janknspank.proto.ArticleProto.Video build() {
+        com.janknspank.proto.ArticleProto.Video result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.janknspank.proto.ArticleProto.Video buildPartial() {
+        com.janknspank.proto.ArticleProto.Video result = new com.janknspank.proto.ArticleProto.Video(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.youtubeUrl_ = youtubeUrl_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.videoSource_ = videoSource_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.widthPx_ = widthPx_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.heightPx_ = heightPx_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.janknspank.proto.ArticleProto.Video) {
+          return mergeFrom((com.janknspank.proto.ArticleProto.Video)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.janknspank.proto.ArticleProto.Video other) {
+        if (other == com.janknspank.proto.ArticleProto.Video.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          bitField0_ |= 0x00000001;
+          type_ = other.type_;
+          onChanged();
+        }
+        if (other.hasYoutubeUrl()) {
+          bitField0_ |= 0x00000002;
+          youtubeUrl_ = other.youtubeUrl_;
+          onChanged();
+        }
+        if (other.hasVideoSource()) {
+          bitField0_ |= 0x00000004;
+          videoSource_ = other.videoSource_;
+          onChanged();
+        }
+        if (other.hasWidthPx()) {
+          setWidthPx(other.getWidthPx());
+        }
+        if (other.hasHeightPx()) {
+          setHeightPx(other.getHeightPx());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.janknspank.proto.ArticleProto.Video parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.janknspank.proto.ArticleProto.Video) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string type = 1;
+      private java.lang.Object type_ = "";
+      /**
+       * <code>optional string type = 1;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string type = 1;</code>
+       */
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          type_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string type = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string type = 1;</code>
+       */
+      public Builder setType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string type = 1;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = getDefaultInstance().getType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string type = 1;</code>
+       */
+      public Builder setTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string youtube_url = 2;
+      private java.lang.Object youtubeUrl_ = "";
+      /**
+       * <code>optional string youtube_url = 2;</code>
+       */
+      public boolean hasYoutubeUrl() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string youtube_url = 2;</code>
+       */
+      public java.lang.String getYoutubeUrl() {
+        java.lang.Object ref = youtubeUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          youtubeUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string youtube_url = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getYoutubeUrlBytes() {
+        java.lang.Object ref = youtubeUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          youtubeUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string youtube_url = 2;</code>
+       */
+      public Builder setYoutubeUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        youtubeUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string youtube_url = 2;</code>
+       */
+      public Builder clearYoutubeUrl() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        youtubeUrl_ = getDefaultInstance().getYoutubeUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string youtube_url = 2;</code>
+       */
+      public Builder setYoutubeUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        youtubeUrl_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string video_source = 3;
+      private java.lang.Object videoSource_ = "";
+      /**
+       * <code>optional string video_source = 3;</code>
+       */
+      public boolean hasVideoSource() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string video_source = 3;</code>
+       */
+      public java.lang.String getVideoSource() {
+        java.lang.Object ref = videoSource_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          videoSource_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string video_source = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getVideoSourceBytes() {
+        java.lang.Object ref = videoSource_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          videoSource_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string video_source = 3;</code>
+       */
+      public Builder setVideoSource(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        videoSource_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string video_source = 3;</code>
+       */
+      public Builder clearVideoSource() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        videoSource_ = getDefaultInstance().getVideoSource();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string video_source = 3;</code>
+       */
+      public Builder setVideoSourceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        videoSource_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 width_px = 4;
+      private int widthPx_ ;
+      /**
+       * <code>optional int32 width_px = 4;</code>
+       */
+      public boolean hasWidthPx() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 width_px = 4;</code>
+       */
+      public int getWidthPx() {
+        return widthPx_;
+      }
+      /**
+       * <code>optional int32 width_px = 4;</code>
+       */
+      public Builder setWidthPx(int value) {
+        bitField0_ |= 0x00000008;
+        widthPx_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 width_px = 4;</code>
+       */
+      public Builder clearWidthPx() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        widthPx_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 height_px = 5;
+      private int heightPx_ ;
+      /**
+       * <code>optional int32 height_px = 5;</code>
+       */
+      public boolean hasHeightPx() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 height_px = 5;</code>
+       */
+      public int getHeightPx() {
+        return heightPx_;
+      }
+      /**
+       * <code>optional int32 height_px = 5;</code>
+       */
+      public Builder setHeightPx(int value) {
+        bitField0_ |= 0x00000010;
+        heightPx_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 height_px = 5;</code>
+       */
+      public Builder clearHeightPx() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        heightPx_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:Video)
+    }
+
+    static {
+      defaultInstance = new Video(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:Video)
+  }
+
   public interface InterpretedDataOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -8129,6 +9548,11 @@ public final class ArticleProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ArticleFeature_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Video_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Video_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_InterpretedData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8144,7 +9568,7 @@ public final class ArticleProto {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/article.proto\032(co" +
       "m/janknspank/database/extensions.proto\032\037" +
-      "com/janknspank/proto/core.proto\"\347\006\n\007Arti" +
+      "com/janknspank/proto/core.proto\"\376\006\n\007Arti" +
       "cle\022 \n\006url_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\032\n" +
       "\003url\030\002 \001(\tB\r\210\246\035\001\230\246\035\377\005\250\246\035\001\022\034\n\005title\030\003 \001(\t" +
       "B\r\210\246\035\001\220\246\035\005\230\246\035\200\002\022\022\n\004type\030\004 \001(\tB\004\230\246\035\031\022\031\n\006a" +
@@ -8164,26 +9588,30 @@ public final class ArticleProto {
       "ndustry_code\030\031 \001(\005B\004\220\246\035\006\022\021\n\003hot\030\024 \001(\010B\004\220",
       "\246\035\006\022+\n\031oldest_hot_duplicate_time\030\025 \001(\003B\010" +
       "\240\246\035\003\220\246\035\006\022\033\n\thot_count\030\026 \001(\005B\010\240\246\035\003\220\246\035\006\022\027\n" +
-      "\005score\030\027 \001(\001B\010\240\246\035\003\220\246\035\006\"<\n\006Reason\022\013\n\007UNKN" +
-      "OWN\020\000\022\014\n\010INDUSTRY\020\001\022\n\n\006PERSON\020\002\022\013\n\007COMPA" +
-      "NY\020\003:\023\212\265\030\017MongoDB.Article\"\223\002\n\016ArticleKey" +
-      "word\022\035\n\007keyword\030\001 \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010s" +
-      "trength\030\002 \001(\005B\004\210\246\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220" +
-      "\246\035\005\230\246\035\005\250\246\035\001\022/\n\006source\030\004 \001(\0162\026.ArticleKey" +
-      "word.Source:\007UNKNOWN\022\030\n\020paragraph_number" +
-      "\030\005 \001(\005\022\027\n\006entity\030\006 \001(\0132\007.Entity\"F\n\006Sourc",
-      "e\022\013\n\007UNKNOWN\020\000\022\007\n\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014" +
-      "\n\010META_TAG\020\003\022\t\n\005TITLE\020\004\"\347\001\n\020SocialEngage" +
-      "ment\022-\n\004site\030\001 \001(\0162\026.SocialEngagement.Si" +
-      "te:\007UNKNOWN\022\031\n\013share_count\030\002 \001(\003B\004\210\246\035\001\022\031" +
-      "\n\013share_score\030\003 \001(\001B\004\210\246\035\001\022\022\n\nlike_count\030" +
-      "\004 \001(\003\022\025\n\rcomment_count\030\005 \001(\003\022\023\n\013create_t" +
-      "ime\030\006 \001(\003\".\n\004Site\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBO" +
-      "OK\020\001\022\013\n\007TWITTER\020\002\"B\n\016ArticleFeature\022\034\n\nf" +
-      "eature_id\030\001 \001(\005B\010\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030" +
-      "\002 \001(\001\"9\n\017InterpretedData\022\031\n\007article\030\001 \001(",
-      "\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.janknspa" +
-      "nk.protoB\014ArticleProto"
+      "\005score\030\027 \001(\001B\010\240\246\035\003\220\246\035\006\022\025\n\005video\030\032 \003(\0132\006." +
+      "Video\"<\n\006Reason\022\013\n\007UNKNOWN\020\000\022\014\n\010INDUSTRY" +
+      "\020\001\022\n\n\006PERSON\020\002\022\013\n\007COMPANY\020\003:\023\212\265\030\017MongoDB" +
+      ".Article\"\223\002\n\016ArticleKeyword\022\035\n\007keyword\030\001" +
+      " \001(\tB\014\210\246\035\001\220\246\035\003\230\246\0352\022\026\n\010strength\030\002 \001(\005B\004\210\246" +
+      "\035\001\022\036\n\004type\030\003 \001(\tB\020\210\246\035\001\220\246\035\005\230\246\035\005\250\246\035\001\022/\n\006so" +
+      "urce\030\004 \001(\0162\026.ArticleKeyword.Source:\007UNKN" +
+      "OWN\022\030\n\020paragraph_number\030\005 \001(\005\022\027\n\006entity\030",
+      "\006 \001(\0132\007.Entity\"F\n\006Source\022\013\n\007UNKNOWN\020\000\022\007\n" +
+      "\003NLP\020\001\022\r\n\tHYPERLINK\020\002\022\014\n\010META_TAG\020\003\022\t\n\005T" +
+      "ITLE\020\004\"\347\001\n\020SocialEngagement\022-\n\004site\030\001 \001(" +
+      "\0162\026.SocialEngagement.Site:\007UNKNOWN\022\031\n\013sh" +
+      "are_count\030\002 \001(\003B\004\210\246\035\001\022\031\n\013share_score\030\003 \001" +
+      "(\001B\004\210\246\035\001\022\022\n\nlike_count\030\004 \001(\003\022\025\n\rcomment_" +
+      "count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site" +
+      "\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002" +
+      "\"B\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010" +
+      "\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030\002 \001(\001\"w\n\005Video\022\022\n",
+      "\004type\030\001 \001(\tB\004\210\246\035\001\022\031\n\013youtube_url\030\002 \001(\tB\004" +
+      "\220\246\035\005\022\032\n\014video_source\030\003 \001(\tB\004\220\246\035\005\022\020\n\010widt" +
+      "h_px\030\004 \001(\005\022\021\n\theight_px\030\005 \001(\005\"9\n\017Interpr" +
+      "etedData\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003u" +
+      "rl\030\002 \003(\tB$\n\024com.janknspank.protoB\014Articl" +
+      "eProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8195,7 +9623,7 @@ public final class ArticleProto {
           internal_static_Article_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Article_descriptor,
-              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Origin", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "ReasonIndustryCode", "Hot", "OldestHotDuplicateTime", "HotCount", "Score", });
+              new java.lang.String[] { "UrlId", "Url", "Title", "Type", "Author", "Origin", "Copyright", "Description", "ImageUrl", "Paragraph", "PublishedTime", "ModifiedTime", "CrawlTime", "WordCount", "Keyword", "SocialEngagement", "Feature", "DedupingStems", "Retain", "Reason", "ReasonIndustryCode", "Hot", "OldestHotDuplicateTime", "HotCount", "Score", "Video", });
           internal_static_ArticleKeyword_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_ArticleKeyword_fieldAccessorTable = new
@@ -8214,8 +9642,14 @@ public final class ArticleProto {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ArticleFeature_descriptor,
               new java.lang.String[] { "FeatureId", "Similarity", });
-          internal_static_InterpretedData_descriptor =
+          internal_static_Video_descriptor =
             getDescriptor().getMessageTypes().get(4);
+          internal_static_Video_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Video_descriptor,
+              new java.lang.String[] { "Type", "YoutubeUrl", "VideoSource", "WidthPx", "HeightPx", });
+          internal_static_InterpretedData_descriptor =
+            getDescriptor().getMessageTypes().get(5);
           internal_static_InterpretedData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_InterpretedData_descriptor,
@@ -8276,6 +9710,9 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           return registry;
         }

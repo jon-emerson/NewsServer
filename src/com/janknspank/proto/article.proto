@@ -146,6 +146,9 @@ message Article {
     (client_serialization) = EXCLUDE,
     (storage_method) = DO_NOT_STORE
   ];
+
+  // Any videos (YouTube or MP4s) we found in the article.
+  repeated Video video = 26;
 }
 
 message ArticleKeyword {
@@ -225,6 +228,23 @@ message ArticleFeature {
   // near 1 means this article is extremely relevant to the given feature.
   // A score above 0.80 means its relevance is in the top 20% of articles.
   optional double similarity = 2;
+}
+
+message Video {
+  optional string type = 1 [
+    (required) = YES
+  ];
+
+  optional string youtube_url = 2 [
+    (storage_method) = PULL_OUT
+  ];
+
+  optional string video_source = 3 [
+    (storage_method) = PULL_OUT
+  ];
+
+  optional int32 width_px = 4;
+  optional int32 height_px = 5;
 }
 
 message InterpretedData {

@@ -251,7 +251,7 @@ a.btn-primary,
 #section-4 {
   background-image: url("http://s3.amazonaws.com/spotter-assets/realistic-commute3-min.jpg");
   background-repeat: no-repeat;
-  background-position: right 0 top;
+  background-position: right 0 bottom;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
