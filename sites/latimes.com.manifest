@@ -36,6 +36,7 @@ path_blacklist {
 }
 paragraph_selector: ".trb_article_page > p"
 paragraph_selector: ".trb_article_page_body > p"
+paragraph_selector: ".htmlStoryFullWidth > p"
 paragraph_blacklist {
   selector: "strong"
   text_regex: "^Follow "

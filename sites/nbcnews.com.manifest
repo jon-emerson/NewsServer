@@ -5,6 +5,9 @@ start_url: "http://www.nbcnews.com/health/diet-fitness"
 path_blacklist {
   needle: "/pop-culture/"
 }
+path_blacklist {
+  needle: "/watch/"
+}
 paragraph_selector: ".article-body p"
 paragraph_selector: ".stack-dropcap > p"
 article_url_pattern {
