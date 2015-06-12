@@ -350,7 +350,8 @@ public class PinterestPinner {
             user,
             new IndustryStreamStrategy(),
             new DiversificationPass.IndustryStreamPass(),
-            ImmutableSet.<String>of());
+            ImmutableSet.<String>of() /* excludeUrlIds */,
+            false /* videoOnly */);
         for (Article article : articles) {
           if (existingPinLinks.contains(article.getUrl())) {
             // If we've already posted the best article for this feature, OK

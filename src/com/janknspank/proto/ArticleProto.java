@@ -7896,14 +7896,29 @@ public final class ArticleProto {
     // optional string type = 1;
     /**
      * <code>optional string type = 1;</code>
+     *
+     * <pre>
+     * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+     * "video/mp4".
+     * </pre>
      */
     boolean hasType();
     /**
      * <code>optional string type = 1;</code>
+     *
+     * <pre>
+     * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+     * "video/mp4".
+     * </pre>
      */
     java.lang.String getType();
     /**
      * <code>optional string type = 1;</code>
+     *
+     * <pre>
+     * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+     * "video/mp4".
+     * </pre>
      */
     com.google.protobuf.ByteString
         getTypeBytes();
@@ -8079,12 +8094,22 @@ public final class ArticleProto {
     private java.lang.Object type_;
     /**
      * <code>optional string type = 1;</code>
+     *
+     * <pre>
+     * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+     * "video/mp4".
+     * </pre>
      */
     public boolean hasType() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional string type = 1;</code>
+     *
+     * <pre>
+     * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+     * "video/mp4".
+     * </pre>
      */
     public java.lang.String getType() {
       java.lang.Object ref = type_;
@@ -8102,6 +8127,11 @@ public final class ArticleProto {
     }
     /**
      * <code>optional string type = 1;</code>
+     *
+     * <pre>
+     * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+     * "video/mp4".
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getTypeBytes() {
@@ -8540,12 +8570,22 @@ public final class ArticleProto {
       private java.lang.Object type_ = "";
       /**
        * <code>optional string type = 1;</code>
+       *
+       * <pre>
+       * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+       * "video/mp4".
+       * </pre>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional string type = 1;</code>
+       *
+       * <pre>
+       * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+       * "video/mp4".
+       * </pre>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -8560,6 +8600,11 @@ public final class ArticleProto {
       }
       /**
        * <code>optional string type = 1;</code>
+       *
+       * <pre>
+       * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+       * "video/mp4".
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -8576,6 +8621,11 @@ public final class ArticleProto {
       }
       /**
        * <code>optional string type = 1;</code>
+       *
+       * <pre>
+       * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+       * "video/mp4".
+       * </pre>
        */
       public Builder setType(
           java.lang.String value) {
@@ -8589,6 +8639,11 @@ public final class ArticleProto {
       }
       /**
        * <code>optional string type = 1;</code>
+       *
+       * <pre>
+       * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+       * "video/mp4".
+       * </pre>
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -8598,6 +8653,11 @@ public final class ArticleProto {
       }
       /**
        * <code>optional string type = 1;</code>
+       *
+       * <pre>
+       * This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+       * "video/mp4".
+       * </pre>
        */
       public Builder setTypeBytes(
           com.google.protobuf.ByteString value) {
@@ -9605,13 +9665,13 @@ public final class ArticleProto {
       "count\030\005 \001(\003\022\023\n\013create_time\030\006 \001(\003\".\n\004Site" +
       "\022\013\n\007UNKNOWN\020\000\022\014\n\010FACEBOOK\020\001\022\013\n\007TWITTER\020\002" +
       "\"B\n\016ArticleFeature\022\034\n\nfeature_id\030\001 \001(\005B\010" +
-      "\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030\002 \001(\001\"w\n\005Video\022\022\n",
-      "\004type\030\001 \001(\tB\004\210\246\035\001\022\031\n\013youtube_url\030\002 \001(\tB\004" +
-      "\220\246\035\005\022\032\n\014video_source\030\003 \001(\tB\004\220\246\035\005\022\020\n\010widt" +
-      "h_px\030\004 \001(\005\022\021\n\theight_px\030\005 \001(\005\"9\n\017Interpr" +
-      "etedData\022\031\n\007article\030\001 \001(\0132\010.Article\022\013\n\003u" +
-      "rl\030\002 \003(\tB$\n\024com.janknspank.protoB\014Articl" +
-      "eProto"
+      "\210\246\035\001\220\246\035\003\022\022\n\nsimilarity\030\002 \001(\001\"\210\001\n\005Video\022\026",
+      "\n\004type\030\001 \001(\tB\010\230\246\0352\210\246\035\001\022\"\n\013youtube_url\030\002 " +
+      "\001(\tB\r\230\246\035\377\005\250\246\035\001\220\246\035\005\022\036\n\014video_source\030\003 \001(\t" +
+      "B\010\230\246\0352\220\246\035\005\022\020\n\010width_px\030\004 \001(\005\022\021\n\theight_p" +
+      "x\030\005 \001(\005\"9\n\017InterpretedData\022\031\n\007article\030\001 " +
+      "\001(\0132\010.Article\022\013\n\003url\030\002 \003(\tB$\n\024com.jankns" +
+      "pank.protoB\014ArticleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9712,8 +9772,12 @@ public final class ArticleProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
           registry.add(com.janknspank.database.ExtensionsProto.required);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
+          registry.add(com.janknspank.database.ExtensionsProto.stringCharset);
           registry.add(com.janknspank.database.ExtensionsProto.storageMethod);
+          registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           return registry;
         }
       };

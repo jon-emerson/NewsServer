@@ -78,7 +78,9 @@ public class SendLunchEmails {
   public static String getDate() {
     String date = DATE_FORMAT.format(new Date());
     String suffix = "th";
-    if (date.endsWith("1")) {
+    if (date.endsWith(" 11") || date.endsWith(" 12") || date.endsWith(" 13")) {
+      suffix = "th";
+    } else if (date.endsWith("1")) {
       suffix = "st";
     } else if (date.endsWith("2")) {
       suffix = "nd";

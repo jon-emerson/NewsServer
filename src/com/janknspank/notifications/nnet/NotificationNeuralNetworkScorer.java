@@ -113,6 +113,7 @@ public final class NotificationNeuralNetworkScorer implements NotificationScorer
         new MainStreamStrategy(),
         new DiversificationPass.MainStreamPass(),
         25 /* results */,
-        ImmutableSet.<String>of());
+        ImmutableSet.<String>of() /* excludeUrlIds */,
+        false /* videoOnly */);
   }
 }

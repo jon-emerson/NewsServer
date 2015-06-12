@@ -60,10 +60,10 @@ public class EntityIdToIndustryRelevances {
               return builder.build();
             }
           }));
-      Database.update(entity.toBuilder()
+      boolean updated = Database.update(entity.toBuilder()
           .setRelevancePassComplete(true)
           .build());
-      System.out.print(".");
+      System.out.print(updated ? "." : "x");
       return null;
     }
   }
@@ -73,8 +73,8 @@ public class EntityIdToIndustryRelevances {
     while (true) {
       Iterable<Entity> entities = Database.with(Entity.class).get(
           new QueryOption.WhereNotTrue("relevance_pass_complete"),
-          new QueryOption.AscendingSort("importance"),
-          new QueryOption.Limit(50));
+          new QueryOption.DescendingSort("keyword"),
+          new QueryOption.Limit(200));
       if (Iterables.size(entities) == 0) {
         System.exit(0);
       }

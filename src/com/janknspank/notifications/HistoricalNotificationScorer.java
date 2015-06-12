@@ -105,6 +105,7 @@ public class HistoricalNotificationScorer implements NotificationScorer {
         new MainStreamStrategy(),
         new DiversificationPass.MainStreamPass(),
         25 /* results */,
-        ImmutableSet.<String>of());
+        ImmutableSet.<String>of(),
+        false /* videoOnly */);
   }
 }

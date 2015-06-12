@@ -89,13 +89,14 @@ public class Articles {
    */
   private static ListenableFuture<Iterable<Article>> getArticlesForKeywordsFuture(
       Iterable<String> keywords, final Article.Reason reason, int limit,
-      Set<String> excludeUrlIds)
+      Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException {
     return Futures.transform(
         Database.with(Article.class).getFuture(
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereEquals("keyword.keyword", keywords),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
+            videoOnly ? new QueryOption.WhereNotNull("video") : null,
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(reason, null));
   }
@@ -105,13 +106,14 @@ public class Articles {
    */
   private static ListenableFuture<Iterable<Article>> getArticlesForEntityIdsFuture(
       Iterable<String> entityIds, final Article.Reason reason, int limit,
-      Set<String> excludeUrlIds)
+      Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException {
     return Futures.transform(
         Database.with(Article.class).getFuture(
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereEquals("keyword.entity.id", entityIds),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
+            videoOnly ? new QueryOption.WhereNotNull("video") : null,
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(reason, null));
   }
@@ -122,10 +124,11 @@ public class Articles {
    */
   public static Iterable<Article> getMainStream(User user)
       throws DatabaseSchemaException, BiznessException {
-    return getMainStream(user, ImmutableSet.<String>of());
+    return getMainStream(user, ImmutableSet.<String>of(), false /* videoOnly */);
   }
 
-  public static Iterable<Article> getMainStream(User user, Set<String> excludeUrlIds)
+  public static Iterable<Article> getMainStream(
+      User user, Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     return Articles.getRankedArticles(
         user,
@@ -133,14 +136,16 @@ public class Articles {
         new MainStreamStrategy(),
         new DiversificationPass.MainStreamPass(),
         NUM_RESULTS,
-        excludeUrlIds);
+        excludeUrlIds,
+        videoOnly);
   }
 
   public static Iterable<Article> getStream(
       User user,
       TimeRankingStrategy strategy,
       DiversificationPass diversificationPass,
-      Set<String> excludeUrlIds)
+      Set<String> excludeUrlIds,
+      boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     return Articles.getRankedArticles(
         user,
@@ -148,7 +153,8 @@ public class Articles {
         strategy,
         diversificationPass,
         NUM_RESULTS,
-        excludeUrlIds);
+        excludeUrlIds,
+        videoOnly);
   }
 
   /**
@@ -164,15 +170,17 @@ public class Articles {
       TimeRankingStrategy strategy,
       DiversificationPass diversificationPass,
       int limit,
-      Set<String> excludeUrlIds)
+      Set<String> excludeUrlIds,
+      boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     return getRankedArticles(
         user, scorer, strategy, diversificationPass, limit,
-        getArticlesForInterests(user, UserInterests.getInterests(user), limit * 3, excludeUrlIds));
+        getArticlesForInterests(
+            user, UserInterests.getInterests(user), limit * 3, excludeUrlIds, videoOnly));
   }
 
   public static Iterable<Article> getEntityStream(
-      Entity entity, User user, Set<String> excludeUrlIds)
+      Entity entity, User user, Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     // As a "hack" to encourage on-topic results for entity queries, so that
     // Barack Obama gets articles mostly about government, find the top
@@ -210,7 +218,8 @@ public class Articles {
               ImmutableList.of(entity.getId()),
               Reason.COMPANY,
               NUM_RESULTS * 5,
-              excludeUrlIds).get());
+              excludeUrlIds,
+              videoOnly).get());
     } catch (InterruptedException | ExecutionException e) {
       throw new BiznessException("Async error: " + e.getMessage(), e);
     }
@@ -307,7 +316,7 @@ public class Articles {
    */
   public static Iterable<Article> getArticlesForInterests(
       User user, Iterable<Interest> interests, int limitPerType,
-      Set<String> excludeUrlIds)
+      Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     Set<String> tombstones = UserInterests.getTombstones(user);
 
@@ -347,13 +356,14 @@ public class Articles {
 
     List<ListenableFuture<Iterable<Article>>> articlesFutures = Lists.newArrayList();
     articlesFutures.add(getArticlesForEntityIdsFuture(
-        entityIds, Article.Reason.COMPANY, limitPerType, excludeUrlIds));
+        entityIds, Article.Reason.COMPANY, limitPerType, excludeUrlIds, videoOnly));
     articlesFutures.add(getArticlesForKeywordsFuture(
-        personNames, Article.Reason.PERSON, limitPerType / 4, excludeUrlIds));
+        personNames, Article.Reason.PERSON, limitPerType / 4, excludeUrlIds, videoOnly));
     articlesFutures.add(getArticlesForKeywordsFuture(
-        companyNames, Article.Reason.COMPANY, limitPerType, excludeUrlIds));
+        companyNames, Article.Reason.COMPANY, limitPerType, excludeUrlIds, videoOnly));
     for (FeatureId featureId : featureIds) {
-      articlesFutures.add(getArticlesByFeatureIdFuture(featureId, limitPerType, excludeUrlIds));
+      articlesFutures.add(getArticlesByFeatureIdFuture(
+          featureId, limitPerType, excludeUrlIds, videoOnly));
     }
     Map<String, Article> dedupingArticleMap = Maps.newHashMap();
     for (ListenableFuture<Iterable<Article>> articlesFuture : articlesFutures) {
@@ -375,35 +385,36 @@ public class Articles {
    * industries.
    */
   public static ListenableFuture<Iterable<Article>> getArticlesByFeatureIdFuture(
-      FeatureId featureId, int limit, Set<String> excludeUrlIds)
+      FeatureId featureId, int limit, Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException {
     return Futures.transform(
         Database.with(Article.class).getFuture(
             new QueryOption.WhereEqualsNumber("feature.feature_id", featureId.getId()),
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
+            videoOnly ? new QueryOption.WhereNotNull("video") : null,
             new QueryOption.Limit(limit)),
         getFunctionToGiveArticlesReason(Reason.INDUSTRY, featureId));
   }
 
   public static Iterable<Article> getArticlesForLinkedInContacts(
-      User user, Set<String> excludeUrlIds)
+      User user, Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     return getArticlesForContacts(user,
         getLinkedInContactNames(user, UserInterests.getTombstones(user)),
-        NUM_RESULTS, excludeUrlIds);
+        NUM_RESULTS, excludeUrlIds, videoOnly);
   }
 
   public static Iterable<Article> getArticlesForAddressBookContacts(
-      User user, Set<String> excludeUrlIds)
+      User user, Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     return getArticlesForContacts(user,
         getAddressBookContactNames(user, UserInterests.getTombstones(user)),
-        NUM_RESULTS, excludeUrlIds);
+        NUM_RESULTS, excludeUrlIds, videoOnly);
   }
 
   private static Iterable<Article> getArticlesForContacts(
-      User user, List<String> contactNames, int limit, Set<String> excludeUrlIds)
+      User user, List<String> contactNames, int limit, Set<String> excludeUrlIds, boolean videoOnly)
       throws DatabaseSchemaException, BiznessException {
     List<Number> featureIdIds = Lists.newArrayList();
     featureIdIds.addAll(UserInterests.getUserIndustryFeatureIdIds(user));
@@ -417,6 +428,7 @@ public class Articles {
             new QueryOption.WhereEqualsNumber("feature.feature_id", featureIdIds),
             new QueryOption.DescendingSort("published_time"),
             new QueryOption.WhereNotEquals("url_id", excludeUrlIds),
+            videoOnly ? new QueryOption.WhereNotNull("video") : null,
             new QueryOption.Limit(limit * 3)));
   }
 

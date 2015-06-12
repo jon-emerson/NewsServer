@@ -41,8 +41,12 @@ public class ViewFeedServlet extends StandardServlet {
               .setIndustryCode(Integer.parseInt(industryCodeId))
               .build())
           .build();
-      articles = Articles.getStream(user, new IndustryStreamStrategy(),
-          new DiversificationPass.IndustryStreamPass(), ImmutableSet.<String>of());
+      articles = Articles.getStream(
+          user,
+          new IndustryStreamStrategy(),
+          new DiversificationPass.IndustryStreamPass(),
+          ImmutableSet.<String>of() /* excludeUrlIds */,
+          false /* videoOnly */);
     } else {
       articles = Articles.getMainStream(user);
     }

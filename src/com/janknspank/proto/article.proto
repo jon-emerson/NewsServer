@@ -231,15 +231,21 @@ message ArticleFeature {
 }
 
 message Video {
+  // This is "youtube" for YouTube videos, otherwise it's a MIME type, like
+  // "video/mp4".
   optional string type = 1 [
+    (string_length) = 50,
     (required) = YES
   ];
 
   optional string youtube_url = 2 [
+    (string_length) = 767,
+    (string_charset) = LATIN1,
     (storage_method) = PULL_OUT
   ];
 
   optional string video_source = 3 [
+    (string_length) = 50,
     (storage_method) = PULL_OUT
   ];
 

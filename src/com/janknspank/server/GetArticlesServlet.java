@@ -174,6 +174,7 @@ public class GetArticlesServlet extends StandardServlet {
     String entityId = this.getParameter(req, "entity_id");
     String entityKeyword = this.getParameter(req, "entity_keyword");
     String entityType = this.getParameter(req, "entity_type");
+    boolean videoOnly = "true".equals(this.getParameter(req, "video_only"));
     Set<String> excludeUrlIdSet = getExcludeUrlIdSet(req);
 
     // This is sent on requests that were initiated from a user's engagement
@@ -215,7 +216,8 @@ public class GetArticlesServlet extends StandardServlet {
                 .build(),
             new IndustryStreamStrategy(),
             new DiversificationPass.IndustryStreamPass(),
-            excludeUrlIdSet);
+            excludeUrlIdSet,
+            videoOnly);
       } else if (entityId != null) {
         Entity.Builder entityBuilder = Entity.newBuilder().setId(entityId);
         Entity entity = null;
@@ -226,7 +228,11 @@ public class GetArticlesServlet extends StandardServlet {
         }
         entityBuilder.setType(entity != null ? entity.getType() : entityType);
         entityBuilder.setKeyword(entity != null ? entity.getKeyword() : entityKeyword);
-        return Articles.getEntityStream(entityBuilder.build(), user, excludeUrlIdSet);
+        return Articles.getEntityStream(
+            entityBuilder.build(),
+            user,
+            excludeUrlIdSet,
+            videoOnly);
       } else if (!Strings.isNullOrEmpty(entityKeyword)) {
         return Articles.getStream(
             user.toBuilder()
@@ -240,13 +246,23 @@ public class GetArticlesServlet extends StandardServlet {
                 .build(),
             new EntityStreamStrategy(),
             new DiversificationPass.NoOpPass(),
-            excludeUrlIdSet);
+            excludeUrlIdSet,
+            videoOnly);
       } else if ("linked_in".equals(contacts)) {
-        return Articles.getArticlesForLinkedInContacts(user, excludeUrlIdSet);
+        return Articles.getArticlesForLinkedInContacts(
+            user,
+            excludeUrlIdSet,
+            videoOnly);
       } else if ("address_book".equals(contacts)) {
-        return Articles.getArticlesForAddressBookContacts(user, excludeUrlIdSet);
+        return Articles.getArticlesForAddressBookContacts(
+            user,
+            excludeUrlIdSet,
+            videoOnly);
       } else {
-        return Articles.getMainStream(user, excludeUrlIdSet);
+        return Articles.getMainStream(
+            user,
+            excludeUrlIdSet,
+            videoOnly);
       }
     } finally {
       try {
