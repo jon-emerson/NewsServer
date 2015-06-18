@@ -3,14 +3,12 @@ package com.janknspank.crawler;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.io.StringReader;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.janknspank.dom.parser.DocumentBuilder;
-import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
@@ -45,9 +43,8 @@ public class KeywordFinderTest {
    */
   @Test
   public void testFindKeywords() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.cnn.com/2015/01/08/foo.html",
-        new StringReader("<html><head>"
+    Document document = Jsoup.parse(
+        "<html><head>"
             + "<meta name=\"keywords\" "
             + "    content=\"BBC, Capital,story,Wikipedia,Brangelina,  brad pitt\"/>"
             + "<title>Article title</title>"
@@ -60,10 +57,11 @@ public class KeywordFinderTest {
             + "Mr. Pitt and Mrs. Jolie love their combined name. The full story is availble "
             + "on wikipedia."
             + "</p></div>"
-            + "</body</html>"));
+            + "</body</html>",
+        "http://www.cnn.com/2015/01/08/foo.html");
     Iterable<ArticleKeyword> keywords =
         KEYWORD_FINDER.findKeywords(
-            "urlId", "Article title", documentNode, ImmutableList.<ArticleFeature>of());
+            "urlId", "Article title", document, ImmutableList.<ArticleFeature>of());
 
     // While these are in the <meta> tag, they do not exist in the document,
     // so we filter them.

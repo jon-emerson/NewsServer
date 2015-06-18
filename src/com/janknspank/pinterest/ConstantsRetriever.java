@@ -28,7 +28,7 @@ public class ConstantsRetriever {
 
     FetchResponse loginPageResponse = fetcher.get(PinterestPinner.PINTEREST_URL + "/login/");
     String javascriptInit =
-        loginPageResponse.getDocumentNode().findFirst("#jsInit").getFlattenedText();
+        loginPageResponse.getDocument().select("#jsInit").first().text();
     Matcher matcher = Pattern.compile("\"app_version\": \"([0-9a-z]+)\"").matcher(javascriptInit);
     if (matcher.find()) {
       appVersion = matcher.group(1);

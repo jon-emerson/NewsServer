@@ -245,7 +245,8 @@ message Video {
   ];
 
   optional string video_source = 3 [
-    (string_length) = 50,
+    (string_length) = 767,
+    (string_charset) = LATIN1,
     (storage_method) = PULL_OUT
   ];
 

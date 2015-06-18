@@ -4,12 +4,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -19,9 +22,6 @@ import com.janknspank.bizness.ArticleFeatures;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.classifier.FeatureId;
 import com.janknspank.common.Logger;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
@@ -34,9 +34,9 @@ public class UrlFinder {
   /**
    * Simple synchronized cache for <base> tag lookups on documents.
    */
-  private static final Map<DocumentNode, String> BASE_URL_MAP = Collections.synchronizedMap(
-      new LinkedHashMap<DocumentNode, String>() {
-        protected boolean removeEldestEntry(Map.Entry<DocumentNode, String> eldest) {
+  private static final Map<Document, String> BASE_URL_MAP = Collections.synchronizedMap(
+      new LinkedHashMap<Document, String>() {
+        protected boolean removeEldestEntry(Map.Entry<Document, String> eldest) {
           return this.size() > 50;
         }
       });
@@ -45,46 +45,45 @@ public class UrlFinder {
    * Retrieves the passed URL by making a request to the respective website,
    * and then interprets the returned results.
    */
-  public static Set<String> findUrls(String url)
-      throws FetchException, ParserException, RequiredFieldException {
+  public static Set<String> findUrls(String url) throws FetchException, RequiredFieldException {
 
     if (url.startsWith("http://readwrite.com/")) {
       return findReadWriteUrls();
     }
 
     FetchResponse response = FETCHER.get(url);
-    return findUrls(response.getDocumentNode());
+    return findUrls(response.getDocument());
   }
 
   /**
    * Returns all the URLs from the passed document.  Note: There is no filtering
    * done!!  It's ALL THE URLs!!  We do not want to crawl them all!
    */
-  public static Set<String> findUrls(DocumentNode documentNode) {
-    List<Node> linkNodes = documentNode.findAll("html > body a[href]");
-    if (linkNodes.isEmpty()) {
+  public static Set<String> findUrls(Document document) {
+    Elements linkEls = document.select("html > body a[href]");
+    if (linkEls.isEmpty()) {
       // Some sites (like archrecord.construction.com) don't have <html> outer
       // tags.  It's illegal, but it don't matter, we still gotta crawl 'em.
-      Node bodyNode = documentNode.findFirst("body");
-      linkNodes = bodyNode.findAll("a[href]");
+      Element bodyEl = document.select("body").first();
+      linkEls = bodyEl.select("a[href]");
     }
 
     Set<String> urlSet = Sets.newHashSet();
-    for (Node linkNode : linkNodes) {
-      String href = linkNode.getAttributeValue("href");
+    for (Node linkEl : linkEls) {
+      String href = linkEl.attr("href");
       String hrefToLowerCase = href.toLowerCase();
       if (!hrefToLowerCase.startsWith("javascript:") &&
           !hrefToLowerCase.startsWith("mailto:") &&
           !hrefToLowerCase.startsWith("whatsapp:")) {
         try {
-          String resolvedUrl = resolveUrl(documentNode, href);
+          String resolvedUrl = resolveUrl(document, href);
           // To save on space, only save links to articles.  Without this,
           // 80% of our data is links to general category pages and the like.
           if (ArticleUrlDetector.isArticle(resolvedUrl)) {
             urlSet.add(resolvedUrl);
           }
         } catch (MalformedURLException e) {
-          LOG.info("Bad relative URL: " + linkNode.getAttributeValue("href"));
+          LOG.info("Bad relative URL: " + linkEl.attr("href"));
         }
       }
     }
@@ -95,13 +94,13 @@ public class UrlFinder {
    * Resolves a relative URL to its fully-qualified version based on either the
    * <base> tag in the article, or the article URL itself.
    */
-  private static String resolveUrl(DocumentNode documentNode, String relativeUrl)
+  private static String resolveUrl(Document document, String relativeUrl)
       throws MalformedURLException {
-    String baseUrl = BASE_URL_MAP.get(documentNode);
+    String baseUrl = BASE_URL_MAP.get(document);
     if (baseUrl == null) {
-      Node baseNode = documentNode.findFirst("base");
-      baseUrl = (baseNode == null) ? documentNode.getUrl() : baseNode.getAttributeValue("href");
-      BASE_URL_MAP.put(documentNode, baseUrl);
+      Node baseEl = document.select("base").first();
+      baseUrl = (baseEl == null) ? document.baseUri() : baseEl.attr("href");
+      BASE_URL_MAP.put(document, baseUrl);
     }
     return new URL(new URL(baseUrl), relativeUrl).toString();
   }
@@ -146,7 +145,7 @@ public class UrlFinder {
   }
 
   public static void main(String args[])
-      throws FetchException, ParserException, RequiredFieldException, BiznessException {
+      throws FetchException, RequiredFieldException, BiznessException {
     for (String url : findReadWriteUrls()) {
       Article article = Iterables.getFirst(
           ArticleCrawler.getArticles(ImmutableList.of(url), true /* retain */).values(), null);

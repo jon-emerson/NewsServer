@@ -17,6 +17,8 @@ import opennlp.tools.util.Span;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultiset;
@@ -29,13 +31,12 @@ import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.EntityType;
 import com.janknspank.common.StringHelper;
+import com.janknspank.crawler.JsoupUtils;
 import com.janknspank.crawler.ParagraphFinder;
 import com.janknspank.crawler.RequiredFieldException;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Validator;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.ArticleProto.ArticleFeature;
 import com.janknspank.proto.ArticleProto.ArticleKeyword;
 import com.janknspank.proto.ArticleProto.ArticleKeyword.Source;
@@ -108,7 +109,7 @@ public class KeywordFinder {
   public Iterable<ArticleKeyword> findKeywords(
       String urlId,
       String title,
-      DocumentNode documentNode,
+      Document document,
       Iterable<ArticleFeature> articleFeatures)
       throws RequiredFieldException {
     List<ArticleKeyword> keywords = new ArrayList<ArticleKeyword>() {
@@ -121,13 +122,13 @@ public class KeywordFinder {
         }
       }
     };
-    Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, documentNode));
-    Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, documentNode));
+    Iterables.addAll(keywords, findKeywordsInMetaTags(urlId, document));
+    Iterables.addAll(keywords, findKeywordsFromHypertext(urlId, document));
     Iterables.addAll(keywords, KeywordCanonicalizer.getArticleKeywordsFromText(title, 0));
 
     // Special handling for the first paragraph: Brute force search for
     // important keywords.
-    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
+    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(document);
     if (!Iterables.isEmpty(paragraphs)) {
       Iterables.addAll(keywords, KeywordCanonicalizer.getArticleKeywordsFromText(
           Iterables.getFirst(paragraphs, null), 1));
@@ -283,14 +284,14 @@ public class KeywordFinder {
    * it.
    * @throws RequiredFieldException 
    */
-  private Set<String> getWordsInArticle(DocumentNode documentNode)
+  private Set<String> getWordsInArticle(Document document)
       throws RequiredFieldException {
-    Iterable<Node> articleNodes = ParagraphFinder.getParagraphNodes(documentNode);
-    articleNodes = Iterables.limit(articleNodes,
-        (int) Math.ceil(((double) Iterables.size(articleNodes)) * 2 / 3)); 
+    Iterable<Element> articleEls = ParagraphFinder.getParagraphEls(document);
+    articleEls = Iterables.limit(articleEls,
+        (int) Math.ceil(((double) Iterables.size(articleEls)) * 2 / 3)); 
     Set<String> wordsInArticle = Sets.newHashSet();
-    for (Node paragraphNode : articleNodes) {
-      for (String word : getTokens(paragraphNode.getFlattenedText())) {
+    for (Element paragraphEl : articleEls) {
+      for (String word : getTokens(paragraphEl.text())) {
         wordsInArticle.add(KeywordUtils.cleanKeyword(word).toLowerCase());
       }
     }
@@ -310,13 +311,13 @@ public class KeywordFinder {
     return false;
   }
 
-  private Multiset<String> getKeywordsFromMetaContent(DocumentNode documentNode, Node metaNode)
+  private Multiset<String> getKeywordsFromMetaContent(Document document, Element metaElement)
       throws RequiredFieldException {
-    Set<String> wordsInArticle = getWordsInArticle(documentNode);
+    Set<String> wordsInArticle = getWordsInArticle(document);
 
     // Find the best delimiter to split on based on which is more prevalent.
     // E.g. some sites use semicolons, others use commas.
-    String rawKeywords = StringHelper.unescape(metaNode.getAttributeValue("content"));
+    String rawKeywords = StringHelper.unescape(metaElement.attr("content"));
     String delimiter =
         (StringUtils.countMatches(rawKeywords, ",") > StringUtils.countMatches(rawKeywords, ";"))
             ? "," : ";";
@@ -333,15 +334,15 @@ public class KeywordFinder {
   }
 
   private Iterable<ArticleKeyword> findKeywordsInMetaTags(
-      final String urlId, DocumentNode documentNode)
+      final String urlId, Document document)
       throws RequiredFieldException {
     final Multiset<String> keywords = HashMultiset.create();
-    for (Node metaNode : documentNode.findAll(ImmutableList.of(
+    for (Element metaElement : JsoupUtils.selectAll(document, ImmutableList.of(
         "html > head > meta[name=\"keywords\"]",
         "html > head > meta[name=\"news_keywords\"]",
         "html > head > meta[name=\"sailthru.tags\"]",
         "html > head > meta[property=\"article:tag\"]"))) {
-      keywords.addAll(getKeywordsFromMetaContent(documentNode, metaNode));
+      keywords.addAll(getKeywordsFromMetaContent(document, metaElement));
     }
     return Iterables.transform(Multisets.copyHighestCountFirst(keywords).elementSet(),
         new Function<String, ArticleKeyword>() {
@@ -364,28 +365,28 @@ public class KeywordFinder {
    * @throws RequiredFieldException 
    */
   private static Iterable<ArticleKeyword> findKeywordsFromHypertext(
-      final String urlId, DocumentNode documentNode) throws RequiredFieldException {
-    // Find all the Nodes inside paragraphs that do not have any children.
+      final String urlId, Document document) throws RequiredFieldException {
+    // Find all the Elements inside paragraphs that do not have any children.
     // E.g. if we had <p><a href="#">Michael Douglass</a> is awesome</p>,
     // this method would return the <a> node only.
-    List<Node> childlessChildNodes = Lists.newArrayList();
-    Map<Node, Integer> nodeParagraphNumberMap = Maps.newHashMap();
+    List<Element> childlessChildEls = Lists.newArrayList();
+    Map<Element, Integer> nodeParagraphNumberMap = Maps.newHashMap();
     int paragraphNumber = 0;
-    List<Node> nodes = ParagraphFinder.getParagraphNodes(documentNode);
-    for (Node paragraphNode : nodes) {
+    List<Element> nodes = ParagraphFinder.getParagraphEls(document);
+    for (Element paragraphEl : nodes) {
       paragraphNumber++;
-      for (Node node : paragraphNode.findAll("*")) {
-        if (!node.hasChildNodes()) {
-          childlessChildNodes.add(node);
-          nodeParagraphNumberMap.put(node, paragraphNumber);
+      for (Element element : paragraphEl.select("*")) {
+        if (element.childNodeSize() == 0) {
+          childlessChildEls.add(element);
+          nodeParagraphNumberMap.put(element, paragraphNumber);
         }
       }
     }
 
     // Find text that looks like keywords in all the childless nodes.
     Map<String, Integer> keywords = Maps.newHashMap();
-    for (Node childlessChildNode : childlessChildNodes) {
-      String possibleKeyword = KeywordUtils.scrubKeyword(childlessChildNode.getFlattenedText());
+    for (Element childlessChildEl : childlessChildEls) {
+      String possibleKeyword = KeywordUtils.scrubKeyword(childlessChildEl.text());
 
       // This text is capitalized like a proper noun, and has 5 or fewer
       // words in it - let's consider it a keyword!
@@ -393,7 +394,7 @@ public class KeywordFinder {
           possibleKeyword.equals(WordUtils.capitalizeFully(possibleKeyword)) &&
           !possibleKeyword.equals(possibleKeyword.toUpperCase()) &&
           StringUtils.countMatches(possibleKeyword, " ") < 5) {
-        keywords.put(possibleKeyword, nodeParagraphNumberMap.get(childlessChildNode));
+        keywords.put(possibleKeyword, nodeParagraphNumberMap.get(childlessChildEl));
       }
     }
 

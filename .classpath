@@ -46,19 +46,18 @@
 	<classpathentry kind="lib" path="target/dependency/commons-math3-3.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/guava-17.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/neuroph-core-2.9.jar"/>
-	<classpathentry kind="lib" path="target/dependency/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="target/dependency/slf4j-nop-1.7.6.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-core-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-kms-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/aws-java-sdk-s3-1.9.19.jar"/>
 	<classpathentry kind="lib" path="target/dependency/restfb-1.8.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/reflections-0.9.9-RC1.jar"/>
-	<classpathentry kind="lib" path="target/dependency/newrelic-java-3.15.0.zip"/>
-	<classpathentry kind="lib" path="target/dependency/newrelic-api-3.15.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/maxmind-db-1.0.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/geoip2-2.1.0.jar"/>
 	<classpathentry kind="lib" path="target/dependency/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="target/dependency/javax.mail-api-1.5.3.jar"/>
 	<classpathentry kind="lib" path="target/dependency/javax.mail-1.5.3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/snacktory-1.2-20130626.123504-3.jar"/>
+	<classpathentry kind="lib" path="target/dependency/jsoup-1.8.2.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

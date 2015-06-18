@@ -10,7 +10,6 @@ import com.janknspank.crawler.ArticleUrlDetector;
 import com.janknspank.crawler.Interpreter;
 import com.janknspank.crawler.RequiredFieldException;
 import com.janknspank.crawler.UrlWhitelist;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.CoreProto.Url;
 
@@ -54,7 +53,7 @@ public class GrabArticle {
           Interpreter.interpret(Url.newBuilder().setUrl(urlString).build()).getArticle(),
           writer);
       writer.flush();
-    } catch (IOException | FetchException | ParserException | RequiredFieldException e) {
+    } catch (IOException | FetchException | RequiredFieldException e) {
       e.printStackTrace();
     }
   }

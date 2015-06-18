@@ -3,18 +3,15 @@ package com.janknspank.crawler;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.FileReader;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.File;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.janknspank.dom.parser.DocumentBuilder;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 
 public class ParagraphFinderTest {
@@ -181,9 +178,9 @@ public class ParagraphFinderTest {
 
   @Test
   public void testCnnMoney() throws Exception {
-    DocumentNode article = DocumentBuilder.build(
-        "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/",
-        new StringReader(CNN_MONEY_PARAGRAPH_HTML));
+    Document article = Jsoup.parse(
+        CNN_MONEY_PARAGRAPH_HTML,
+        "http://money.cnn.com/2014/02/19/technology/social/facebook-whatsapp/");
     List<String> paragraphs = ImmutableList.copyOf(ParagraphFinder.getParagraphs(article));
     assertEquals(13, paragraphs.size());
     assertEquals(CNN_MONEY_PARAGRAPH_0, paragraphs.get(0));
@@ -203,8 +200,9 @@ public class ParagraphFinderTest {
 
   @Test
   public void testSkyscraperNews() throws Exception {
-    DocumentNode article = DocumentBuilder.build("http://www.skyscrapernews.com/news.php?ref=3520",
-        new StringReader(SKYSCRAPER_NEWS_PARAGRAPH_HTML));
+    Document article = Jsoup.parse(
+        SKYSCRAPER_NEWS_PARAGRAPH_HTML,
+        "http://www.skyscrapernews.com/news.php?ref=3520");
     List<String> paragraphs = ImmutableList.copyOf(ParagraphFinder.getParagraphs(article));
     assertEquals(5, paragraphs.size());
     assertEquals(SKYSCRAPER_NEWS_PARAGRAPH_0, paragraphs.get(0));
@@ -216,27 +214,23 @@ public class ParagraphFinderTest {
 
   @Test
   public void testGetParagraphNodes() throws Exception {
-    FileReader reader = null;
-    try {
-      reader = new FileReader("testdata/abcnews-sunday-on-this-week.html");
-      DocumentNode documentNode = DocumentBuilder.build(
-          "http://abcnews.go.com/blogs/politics/2015/01/sunday-on-this-week/", reader);
-      List<Node> paragraphNodes = ParagraphFinder.getParagraphNodes(documentNode);
+    Document documentNode = Jsoup.parse(
+        new File("testdata/abcnews-sunday-on-this-week.html"),
+        "UTF-8",
+        "http://abcnews.go.com/blogs/politics/2015/01/sunday-on-this-week/");
+    Elements paragraphEls = ParagraphFinder.getParagraphEls(documentNode);
 
-      // Yea, you're right, the first two paragraphs shouldn't be here.  But we're
-      // basically checking for regressions in parsing here, not absolute
-      // correctness.
-      assertTrue(paragraphNodes.get(0).getFlattenedText().startsWith(
-          "AP"));
-      assertTrue(paragraphNodes.get(1).getFlattenedText().startsWith(
-          "The latest breaking details on the AirAsia Flight QZ 8501 disaster"));
-      assertTrue(paragraphNodes.get(2).getFlattenedText().startsWith(
-          "Then, we talk to incoming members of Congress already"));
-      assertTrue(paragraphNodes.get(3).getFlattenedText().startsWith(
-          "Plus, the powerhouse roundtable debates all the"));
-    } finally {
-      IOUtils.closeQuietly(reader);
-    }
+    // Yea, you're right, the first two paragraphs shouldn't be here.  But we're
+    // basically checking for regressions in parsing here, not absolute
+    // correctness.
+    assertTrue(paragraphEls.get(0).text().startsWith(
+        "AP"));
+    assertTrue(paragraphEls.get(1).text().startsWith(
+        "The latest breaking details on the AirAsia Flight QZ 8501 disaster"));
+    assertTrue(paragraphEls.get(2).text().startsWith(
+        "Then, we talk to incoming members of Congress already"));
+    assertTrue(paragraphEls.get(3).text().startsWith(
+        "Plus, the powerhouse roundtable debates all the"));
   }
 
   @Test
@@ -246,26 +240,24 @@ public class ParagraphFinderTest {
     //     major-convention-threatens-to-move-over-indiana-bill-southwest-kicks-
     //     man/toronto/story/30210
     // The paragraphs were all included twice due to the initial empty <p>.
-    Reader reader = new StringReader(
-        "<html><body>"
-            + "<p>"
-            + "<p>Paragraph 1"
-            + "<p>"
-            + "<p>Paragraph 2"
-            + "<p>"
-            + "<p>Paragraph 3"
-            + "</body></html>");
+    String html = "<html><body>"
+        + "<p>"
+        + "<p>Paragraph 1"
+        + "<p>"
+        + "<p>Paragraph 2"
+        + "<p>"
+        + "<p>Paragraph 3"
+        + "</body></html>";
     SiteManifests.addSiteManifest(SiteManifest.newBuilder()
         .setRootDomain("testsite.com")
         .addParagraphSelector("p")
         .build());
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://testsite.com/article", reader);
-    List<Node> paragraphNodes = ParagraphFinder.getParagraphNodes(documentNode);
+    Document document = Jsoup.parse(html, "http://testsite.com/article");
+    Elements paragraphEls = ParagraphFinder.getParagraphEls(document);
 
-    assertEquals(3, paragraphNodes.size());
-    assertEquals("Paragraph 1", paragraphNodes.get(0).getFlattenedText());
-    assertEquals("Paragraph 2", paragraphNodes.get(1).getFlattenedText());
-    assertEquals("Paragraph 3", paragraphNodes.get(2).getFlattenedText());
+    assertEquals(3, paragraphEls.size());
+    assertEquals("Paragraph 1", paragraphEls.get(0).text());
+    assertEquals("Paragraph 2", paragraphEls.get(1).text());
+    assertEquals("Paragraph 3", paragraphEls.get(2).text());
   }
 }

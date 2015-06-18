@@ -5,14 +5,18 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import jdk.nashorn.internal.runtime.ParserException;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.google.api.client.util.Lists;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.janknspank.bizness.BiznessException;
 import com.janknspank.common.Logger;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
@@ -30,27 +34,26 @@ class UrlCrawler {
   private static final Logger LOG = new Logger(UrlCrawler.class);
   private final Fetcher fetcher = new Fetcher();
 
-  private String getArticleUrl(Node itemNode) {
-    List<Node> linkNodes = itemNode.findAll("atom:link");
-    linkNodes.addAll(itemNode.findAll("link"));
+  private String getArticleUrl(Element itemEl) {
+    Elements linkEls = JsoupUtils.selectAll(itemEl, ImmutableList.of("atom:link", "link"));
     String articleUrl = null;
-    if (linkNodes.size() > 0) {
-      String href = linkNodes.get(0).getAttributeValue("href");
+    if (linkEls.size() > 0) {
+      String href = linkEls.first().attr("href");
       if (href != null) {
         articleUrl = href;
       } else {
         // Some sites (e.g. mercurynews.com) put the URL as character data inside
         // the <link>...</link> element.
-        String maybeUrl = linkNodes.get(0).getFlattenedText();
+        String maybeUrl = linkEls.first().text();
         if (ArticleUrlDetector.isArticle(maybeUrl)) {
           articleUrl = maybeUrl;
         } else {
           // Then, some sites put the URL in the GUID, while using 'link' for
           // a trackable click-through URL that doesn't tell us anything and
           // is not canonicalized.  See if we can use the GUID URL.
-          List<Node> guidNodes = itemNode.findAll("guid");
-          if (guidNodes.size() > 0) {
-            maybeUrl = guidNodes.get(0).getFlattenedText();
+          Elements guidEls = itemEl.select("guid");
+          if (guidEls.size() > 0) {
+            maybeUrl = guidEls.first().text();
             if (ArticleUrlDetector.isArticle(maybeUrl)) {
               articleUrl = maybeUrl;
             }
@@ -75,11 +78,9 @@ class UrlCrawler {
     try {
       fetchResponse = fetcher.get(rssUrl);
       if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
-        DocumentNode documentNode = fetchResponse.getDocumentNode();
-        for (Node itemNode : Iterables.concat(
-            documentNode.findAll("item"),
-            documentNode.findAll("entry"))) {
-          String articleUrl = getArticleUrl(itemNode);
+        Document document = fetchResponse.getDocument();
+        for (Element itemEl : JsoupUtils.selectAll(document, ImmutableList.of("item", "entry"))) {
+          String articleUrl = getArticleUrl(itemEl);
           if (articleUrl != null) {
             urls.add(articleUrl);
           }

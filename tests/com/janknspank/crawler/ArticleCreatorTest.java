@@ -4,23 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.FileReader;
-import java.io.StringReader;
+import java.io.File;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
 import com.janknspank.common.DateParserTest;
-import com.janknspank.dom.parser.DocumentBuilder;
-import com.janknspank.dom.parser.DocumentNode;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CoreProto.Url;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 
-@SuppressWarnings("resource")
 public class ArticleCreatorTest {
   private static final String DESCRIPTION = "Hello there boys and girls";
   private static final Url URL = Url.newBuilder()
@@ -96,16 +94,16 @@ public class ArticleCreatorTest {
    */
   @Test
   public void testCreate() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        URL.getUrl(),
-        new StringReader("<html><head>"
+    Document document = Jsoup.parse(
+        "<html><head>"
             + "<meta name=\"keywords\" content=\"BBC, Capital,story,STORY-VIDEO,Office Space\"/>"
             + "<meta name=\"description\" content=\"" + DESCRIPTION + "\"/>"
             + "<title>&#8203;National Society of Film Critics goes for Godard - CBS News</title>"
             + "</head><body>"
             + "<div class=\"cnn_storyarea\"><p>Super article man!!!</p></div>"
-            + "</body</html>"));
-    Article article = ArticleCreator.create(URL, documentNode);
+            + "</body</html>",
+        URL.getUrl());
+    Article article = ArticleCreator.create(URL, document);
     assertEquals("National Society of Film Critics goes for Godard", article.getTitle());
     assertEquals(DESCRIPTION, article.getDescription());
 
@@ -117,9 +115,10 @@ public class ArticleCreatorTest {
     assertEquals(24, calendar.get(Calendar.DAY_OF_MONTH));
   }
 
-  private DocumentNode createDocumentWithTitle(String title) throws Exception {
-    return DocumentBuilder.build("url",
-        new StringReader("<html><head><title>" + title + "</title></head></html>"));
+  private Document createDocumentWithTitle(String title) throws Exception {
+    return Jsoup.parse(
+        "<html><head><title>" + title + "</title></head></html>",
+        "url");
   }
 
   @Test
@@ -224,46 +223,49 @@ public class ArticleCreatorTest {
   @Test
   public void testGetPublishedTime() throws Exception {
     // From Cbc.ca.
-    DocumentNode documentNode = DocumentBuilder.build("url",
-        new StringReader("<html><head><title><meta name=\"date\" content=\"2015/01/07\" />"
-            + "</title></head></html>"));
+    Document document = Jsoup.parse(
+        "<html><head><title>blah</title><meta name=\"date\" content=\"2015/01/07\" />"
+            + "</head></html>",
+        "url");
     DateParserTest.assertSameTime("20150107000000",
-        ArticleCreator.getPublishedTime(documentNode, URL));
+        ArticleCreator.getPublishedTime(document, URL));
 
     // From Cbsnews.com.
-    documentNode = DocumentBuilder.build("url",
-        new StringReader("<html><head><title>"
+    document = Jsoup.parse(
+        "<html><head><title>blahhhh</title>"
             + "<meta itemprop=\"datePublished\" content=\"January 9, 2015, 3:43 AM\">"
-            + "</title></head></html>"));
+            + "</head></html>",
+        "url");
     DateParserTest.assertSameTime("20150109034300",
-        ArticleCreator.getPublishedTime(documentNode, URL));
+        ArticleCreator.getPublishedTime(document, URL));
 
     // From abc.net.au: Get the date from the URL.
-    documentNode = DocumentBuilder.build(
+    document = Jsoup.parse(
+        "<html><head></head></html>",
         "http://www.abc.net.au/news/2015-01-01/victims-of-sydney-to-hobart-yacht-"
-        + "race-plane-crash/5995656",
-        new StringReader("<html><head></head></html>"));
+            + "race-plane-crash/5995656");
     DateParserTest.assertSameTime("20150101000000",
-        ArticleCreator.getPublishedTime(documentNode, URL));
+        ArticleCreator.getPublishedTime(document, URL));
 
     // From http://advice.careerbuilder.com/: Get the date from the copyright notice.
-    documentNode = DocumentBuilder.build(
-        "http://advice.careerbuilder.com/posts/how-to-be-a-great-career-wingman",
-        new StringReader("<html><body><div id=\"post-content\">"
+    document = Jsoup.parse(
+        "<html><body><div id=\"post-content\">"
             + "<div class=\"copyright\">© 2014 CareerBuilder, LLC. "
             + "Original publish date: 12.26.2014</div>"
-            + "</body></html>"));
+            + "</body></html>",
+        "http://advice.careerbuilder.com/posts/how-to-be-a-great-career-wingman");
     DateParserTest.assertSameTime("20141226000000",
-        ArticleCreator.getPublishedTime(documentNode, URL));
+        ArticleCreator.getPublishedTime(document, URL));
   }
 
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testNytimesArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.nytimes.com/2015/01/04/realestate/year-of-the-condo-in-new-york-city.html",
-        new FileReader("testdata/year-of-the-condo-in-new-york-city.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/year-of-the-condo-in-new-york-city.html"),
+        "UTF-8",
+        "http://www.nytimes.com/2015/01/04/realestate/year-of-the-condo-in-new-york-city.html");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals("Twice as many new condominium units will hit the Manhattan "
         + "market this year as in 2014.", article.getDescription());
     assertEquals("Year of the Condo in New York City", article.getTitle());
@@ -274,10 +276,11 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testTechCrunchArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-future-of-finance/",
-        new FileReader("testdata/techcrunch-the-sharing-economy-and-the-future-of-finance.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/techcrunch-the-sharing-economy-and-the-future-of-finance.html"),
+        "UTF-8",
+        "http://techcrunch.com/2015/01/03/the-sharing-economy-and-the-future-of-finance/");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals("Banking has gone from somewhere you go to something you "
         + "do. If we are to believe that the sharing economy will shape our "
         + "future, banking and all financial services will become something "
@@ -291,11 +294,12 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testSfgateArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
+    Document document = Jsoup.parse(
+        new File("testdata/sfgate-news-of-the-day-jan-7.html"),
+        "UTF-8",
         "http://www.sfgate.com/nation/article/"
-        + "News-of-the-day-from-across-the-nation-Jan-7-5997832.php",
-        new FileReader("testdata/sfgate-news-of-the-day-jan-7.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+            + "News-of-the-day-from-across-the-nation-Jan-7-5997832.php");
+    Article article = ArticleCreator.create(URL, document);
     assertTrue(article.getDescription().startsWith("The launch countdown of "
         + "a rocket carrying equipment and supplies for the International Space "
         + "Station was called off just minutes before it was to lift off from "
@@ -310,14 +314,15 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testBbcArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.bbc.com/future/story/20141219-why-does-guilt-increase-pleasure",
-        new FileReader("testdata/bbc-why-does-guilt-increase-pleasure.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/bbc-why-does-guilt-increase-pleasure.html"),
+        "UTF-8",
+        "http://www.bbc.com/future/story/20141219-why-does-guilt-increase-pleasure");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "Feelings of guilt can make a temptations feel even more seductive. "
-        + "So could we be healthier if we just embraced a little bit of vice, "
-        + "asks David Robson.",
+            + "So could we be healthier if we just embraced a little bit of vice, "
+            + "asks David Robson.",
         article.getDescription());
     assertEquals("Psychology: Why does guilt increase pleasure?", article.getTitle());
     assertEquals("http://ichef.bbci.co.uk/wwfeatures/624_351/images/live/p0/2f/l8/p02fl8qx.jpg",
@@ -326,7 +331,7 @@ public class ArticleCreatorTest {
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
             "This year, my New Year’s Resolutions are going to take a somewhat different "
-            + "form to those of previous Januaries."));
+                + "form to those of previous Januaries."));
     assertEquals("And that is exactly what I plan to do.",
         article.getParagraph(article.getParagraphCount() - 1));
   }
@@ -334,14 +339,15 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testBloombergArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
+    Document document = Jsoup.parse(
+        new File("testdata/bloomberg-nypd-funeral-protest-backlash.html"),
+        "UTF-8",
         "http://www.bloomberg.com/politics/articles/2014-12-30/the-new-york-times-joins-"
-        + "the-nypd-funeral-protest-backlash",
-        new FileReader("testdata/bloomberg-nypd-funeral-protest-backlash.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+            + "the-nypd-funeral-protest-backlash");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "The editorial board criticized what it called one of several acts of "
-        + "“passive-aggressive contempt and self-pity.”",
+            + "“passive-aggressive contempt and self-pity.”",
         article.getDescription());
     assertEquals("The New York Times Joins the NYPD Funeral Protest Backlash", article.getTitle());
     assertEquals("http://media.gotraffic.net/images/iqh7RbW8gmWo/v6/-1x-1.jpg",
@@ -349,20 +355,21 @@ public class ArticleCreatorTest {
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
             "Before NYPD Officers Rafael Ramos and Wenjian Liu were ambushed while on "
-            + "patrol in Brooklyn, the Patrolmen’s Benevolent Association"));
+                + "patrol in Brooklyn, the Patrolmen’s Benevolent Association"));
   }
 
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testFortuneArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://fortune.com/2012/04/06/gm-sees-self-driving-cars-sooner-not-later/",
-        new FileReader("testdata/fortune-gm-sees-self-driving-cars-sooner-not-later.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/fortune-gm-sees-self-driving-cars-sooner-not-later.html"),
+        "UTF-8",
+        "http://fortune.com/2012/04/06/gm-sees-self-driving-cars-sooner-not-later/");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "An array of new sensors, warnings and automatic controls can already help drivers "
-        + "detect hazardous situations and avoid accidents. More advanced cars aren't that "
-        + "far away, the company says.",
+            + "detect hazardous situations and avoid accidents. More advanced cars aren't that "
+            + "far away, the company says.",
         article.getDescription());
     assertEquals("GM sees self-driving cars sooner, not later", article.getTitle());
     assertEquals("http://subscription-assets.timeinc.com/current/510_top1_150_thumb.jpg",
@@ -375,22 +382,23 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testSlateArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
+    Document document = Jsoup.parse(
+        new File("testdata/slate-facebook-unethical-experiment.html"),
+        "UTF-8",
         "http://www.slate.com/articles/health_and_science/science/2014/06/facebook_unethical_"
-        + "experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html",
-        new FileReader("testdata/slate-facebook-unethical-experiment.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+            + "experiment_it_made_news_feeds_happier_or_sadder_to_manipulate.html");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "Facebook has been experimenting on us. A new paper in the Proceedings of the "
-        + "National Academy of Sciences reveals that Facebook intentionally manipulated "
-        + "the news feeds of almost 700,000 users in order to study “emotional contagion "
-        + "through social networks.” The researchers, who are affiliated with Facebook, "
-        + "Cornell, and the University...",
+            + "National Academy of Sciences reveals that Facebook intentionally manipulated "
+            + "the news feeds of almost 700,000 users in order to study “emotional contagion "
+            + "through social networks.” The researchers, who are affiliated with Facebook, "
+            + "Cornell, and the University...",
         article.getDescription());
     assertEquals("Facebook’s Unethical Experiment Manipulated Users’ Emotions", article.getTitle());
     assertEquals("http://www.slate.com/content/dam/slate/articles/health_and_science/science/2014/"
-        + "06/facebook_unethical_experiment_it_made_news_feeds_happier_or_sadder_to_manipulate/"
-        + "465888347.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg",
+            + "06/facebook_unethical_experiment_it_made_news_feeds_happier_or_sadder_to_manipulate/"
+            + "465888347.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg",
         article.getImageUrl());
     assertTrue("Unexpected first paragraph: " + article.getParagraph(0),
         article.getParagraph(0).startsWith(
@@ -403,11 +411,12 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testSlateArticle2() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.slate.com/articles/life/food/2015/02/"
-        + "hellmann_s_mayonnaise_different_texture_has_something_changed_in_unilever.single.html",
-        new FileReader("testdata/slate-hellmanns-mayonnaise-different-texture.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/slate-hellmanns-mayonnaise-different-texture.html"),
+        "UTF-8",
+        "http://www.slate.com/articles/life/food/2015/02/hellmann_s_mayonnaise_different_"
+            + "texture_has_something_changed_in_unilever.single.html");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals("Hellmann’s Real Mayonnaise has been smeared in the news lately, thanks to a "
         + "lawsuit filed by its parent company, Unilever, against fledgling vegan “mayo” purveyor "
         + "Hampton Creek. The case rested on the notion that Hampton Creek’s flagship product, "
@@ -435,11 +444,12 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testVentureBeatArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
+    Document document = Jsoup.parse(
+        new File("testdata/venturebeat-googles-eric-schmidt-has-a-10-year-prediction.html"),
+        "UTF-8",
         "http://venturebeat.com/2015/01/29/googles-eric-schmidt-has-a-10-year-prediction-"
-        + "of-how-tech-will-disrupt-whole-industries/",
-        new FileReader("testdata/venturebeat-googles-eric-schmidt-has-a-10-year-prediction.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+            + "of-how-tech-will-disrupt-whole-industries/");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "Mixing and matching free services",
         article.getDescription());
@@ -458,10 +468,11 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testRedHerringArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/",
-        new FileReader("testdata/redherring-alibabas-road-largest-ipo-ever.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/redherring-alibabas-road-largest-ipo-ever.html"),
+        "UTF-8",
+        "http://www.redherring.com/finance/alibabas-road-largest-ipo-ever/");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "Over the past two weeks, institutional investors have piled into the Alibaba "
         + "roadshow as if the company was handing out free money. The long awaited "
@@ -482,11 +493,12 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testStartupWorkoutArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
+    Document document = Jsoup.parse(
+        new File("testdata/startupworkout-inbox-hero-how-to-write-hypnotizing-emails.html"),
+        "UTF-8",
         "http://startupworkout.com/inbox-hero-how-to-write-hypnotizing-emails-that-convert-"
-        + "like-crazy/",
-        new FileReader("testdata/startupworkout-inbox-hero-how-to-write-hypnotizing-emails.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+            + "like-crazy/");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals(
         "If someone was able to travel back in time and tell me 10 years ago that email would "
         + "still be fundamental to how we communicate today, I probably would have dropped "
@@ -507,10 +519,11 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testMediumArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4",
-        new FileReader("testdata/medium-thoughts-on-google.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/medium-thoughts-on-google.html"),
+        "UTF-8",
+        "https://medium.com/@chrismessina/thoughts-on-google-8883844a9ca4");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals("I fucked up. So has Google.", article.getDescription());
     assertEquals("Thoughts on Google+", article.getTitle());
     assertEquals("https://d262ilb51hltx0.cloudfront.net/max/800/1*eoQ_FC_sDMQ7WEs69OL7kw.jpeg",
@@ -523,10 +536,11 @@ public class ArticleCreatorTest {
   // Don't run for now: Takes too long.  Should really be an integration/big test.
   // @Test
   public void testTechnologyReviewArticle() throws Exception {
-    DocumentNode documentNode = DocumentBuilder.build(
-        "http://www.technologyreview.com/review/534581/the-purpose-of-silicon-valley/",
-        new FileReader("testdata/technologyreview-the-purpose-of-silicon-valley.html"));
-    Article article = ArticleCreator.create(URL, documentNode);
+    Document document = Jsoup.parse(
+        new File("testdata/technologyreview-the-purpose-of-silicon-valley.html"),
+        "UTF-8",
+        "http://www.technologyreview.com/review/534581/the-purpose-of-silicon-valley/");
+    Article article = ArticleCreator.create(URL, document);
     assertEquals("Capital and engineering talent have been flocking to seemingly "
         + "trivial mobile apps. But would we really be better off if more startups "
         + "instead went directly after big problems?", article.getDescription());

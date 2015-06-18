@@ -4,19 +4,19 @@ import java.util.Collection;
 
 import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.jsoup.nodes.Document;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.janknspank.dom.parser.DocumentNode;
 
 public class FetchResponse {
   private final int statusCode;
-  private final DocumentNode documentNode;
+  private final Document document;
   private final Multimap<String, String> headers;
 
-  FetchResponse(CloseableHttpResponse response, DocumentNode documentNode) {
+  FetchResponse(CloseableHttpResponse response, Document document) {
     this.statusCode = response.getStatusLine().getStatusCode();
-    this.documentNode = documentNode;
+    this.document = document;
 
     ImmutableMultimap.Builder<String, String> headerMapBuilder = ImmutableMultimap.builder();
     for (Header header : response.getAllHeaders()) {
@@ -29,8 +29,8 @@ public class FetchResponse {
     return statusCode;
   }
 
-  public DocumentNode getDocumentNode() {
-    return documentNode;
+  public Document getDocument() {
+    return document;
   }
 
   public Collection<String> getHeaders(String headerName) {

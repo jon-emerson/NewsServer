@@ -4,8 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.SequenceInputStream;
 
 import org.apache.commons.io.IOUtils;
@@ -22,11 +20,12 @@ import com.google.common.base.Charsets;
  * that FAILED to detect Windows CP1252 on a fairly trivial document.
  * Mozilla's implementation works flawlessly, though.
  */
-class CharsetDetectingReader extends Reader {
+class CharsetDetectingInputStream extends InputStream {
+  private final String charSet;
   private final InputStream originalInputStream;
-  private final InputStreamReader internalReader;
+  private final InputStream internalInputStream;
 
-  public CharsetDetectingReader(InputStream inputStream) throws IOException {
+  public CharsetDetectingInputStream(InputStream inputStream) throws IOException {
     this.originalInputStream = inputStream;
     UniversalDetector detector = new UniversalDetector(null);
 
@@ -47,26 +46,27 @@ class CharsetDetectingReader extends Reader {
     detector.dataEnd();
 
     // Get out detected encoding, falling back to UTF-8.
-    String charset = (detector.getDetectedCharset() == null)
+    charSet = (detector.getDetectedCharset() == null)
         ? Charsets.UTF_8.name() : detector.getDetectedCharset();
 
     // Return a Reader for the detected Charset, using the combined data from
     // what we read to detect the charset and what we haven't yet read.
-    internalReader = new InputStreamReader(
-        new SequenceInputStream(
-            new ByteArrayInputStream(baos.toByteArray()),
-            inputStream),
-        charset);
+    internalInputStream = new SequenceInputStream(
+        new ByteArrayInputStream(baos.toByteArray()), inputStream);
   }
 
   @Override
   public void close() throws IOException {
     IOUtils.closeQuietly(originalInputStream);
-    IOUtils.closeQuietly(internalReader);
+    IOUtils.closeQuietly(internalInputStream);
   }
 
   @Override
-  public int read(char[] cbuf, int off, int len) throws IOException {
-    return internalReader.read(cbuf, off, len);
+  public int read() throws IOException {
+    return internalInputStream.read();
+  }
+
+  public String getCharSet() {
+    return charSet;
   }
 }

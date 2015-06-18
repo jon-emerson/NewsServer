@@ -33,7 +33,6 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.ArticleProto.InterpretedData;
@@ -140,7 +139,7 @@ public class ArticleCrawler implements Callable<Void> {
       } catch (DatabaseSchemaException | DatabaseRequestException | BiznessException e) {
         // Internal error (bug in our code).
         e.printStackTrace();
-      } catch (FetchException|ParserException|RequiredFieldException e) {
+      } catch (FetchException | RequiredFieldException e) {
         // Bad article.
         e.printStackTrace();
       }
@@ -165,7 +164,7 @@ public class ArticleCrawler implements Callable<Void> {
    *     to retrain our vectors or neural network.
    */
   public static Article crawl(Url url, boolean retain)
-      throws FetchException, ParserException, RequiredFieldException, DatabaseSchemaException,
+      throws FetchException, RequiredFieldException, DatabaseSchemaException,
           DatabaseRequestException, BiznessException {
     System.err.println("Crawling: " + url.getUrl());
 
@@ -246,7 +245,7 @@ public class ArticleCrawler implements Callable<Void> {
    */
   private static Map<String, Article> getNewArticles(
       final Iterable<String> urlStrings, final boolean retain)
-      throws DatabaseRequestException, DatabaseSchemaException, FetchException, ParserException,
+      throws DatabaseRequestException, DatabaseSchemaException, FetchException,
           RequiredFieldException, BiznessException {
     Iterable<Url> urls = Urls.put(urlStrings, "");
     final ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
@@ -292,7 +291,7 @@ public class ArticleCrawler implements Callable<Void> {
               new HashSet<String>(Lists.newArrayList(urlStrings)), articles.keySet()), retain))
           .build();
     } catch (DatabaseSchemaException | DatabaseRequestException | FetchException
-        | ParserException | RequiredFieldException e) {
+        | RequiredFieldException e) {
       throw new BiznessException("Could not get articles: " + e.getMessage(), e);
     }
 

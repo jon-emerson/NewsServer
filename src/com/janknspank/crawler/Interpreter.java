@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
@@ -50,7 +50,7 @@ public class Interpreter {
    * and then interprets the returned results.
    */
   public static InterpretedData interpret(Url url)
-      throws FetchException, ParserException, RequiredFieldException {
+      throws FetchException, RequiredFieldException {
     FetchResponse response = null;
     Reader reader = null;
     try {
@@ -59,17 +59,17 @@ public class Interpreter {
         throw new FetchException(
             "URL not found (" + response.getStatusCode() + "): " + url.getUrl());
       }
-      DocumentNode documentNode = response.getDocumentNode();
-      if (ReadWriteArticleHandler.isReadWriteArticle(documentNode)) {
-        documentNode = ReadWriteArticleHandler.getRealDocumentNode(documentNode);
+      Document document = response.getDocument();
+      if (ReadWriteArticleHandler.isReadWriteArticle(document)) {
+        document = ReadWriteArticleHandler.getRealDocument(document);
       }
-      return interpret(url, documentNode);
+      return interpret(url, document);
     } finally {
       IOUtils.closeQuietly(reader);
     }
   }
 
-  private static Iterable<Video> getVideos(DocumentNode documentNode, Iterable<String> urls) {
+  private static Iterable<Video> getVideos(Document document, Iterable<String> urls) {
     Set<String> youTubeIdsSoFar = Sets.newHashSet();
     List<Video> videos = Lists.newArrayList();
 
@@ -89,8 +89,8 @@ public class Interpreter {
     }
 
     // Find embedded YouTube videos.
-    for (Node iframeNode : documentNode.findAll("body iframe[src]")) {
-      String src = iframeNode.getAttributeValue("src");
+    for (Element iframeEl : document.select("body iframe[src]")) {
+      String src = iframeEl.attr("src");
       Matcher matcher = YOUTUBE_EMBED_URL_PATTERN.matcher(src);
       if (matcher.find()) {
         if (youTubeIdsSoFar.contains(matcher.group(2))) {
@@ -99,11 +99,11 @@ public class Interpreter {
         Video.Builder videoBuilder = Video.newBuilder()
             .setType("youtube")
             .setYoutubeUrl("https://www.youtube.com/watch?v=" + matcher.group(2));
-        String width = iframeNode.getAttributeValue("width");
+        String width = iframeEl.attr("width");
         if (width != null) {
           videoBuilder.setWidthPx(NumberUtils.toInt(width, 0));
         }
-        String height = iframeNode.getAttributeValue("height");
+        String height = iframeEl.attr("height");
         if (height != null) {
           videoBuilder.setHeightPx(NumberUtils.toInt(height, 0));
         }
@@ -113,14 +113,14 @@ public class Interpreter {
     }
 
     // Find HTML5 videos.
-    for (Node videoNode : documentNode.findAll("body video")) {
-      String width = videoNode.getAttributeValue("width");
-      String height = videoNode.getAttributeValue("height");
-      for (Node sourceNode : videoNode.findAll("source[src]")) {
+    for (Element videoEl : document.select("body video")) {
+      String width = videoEl.attr("width");
+      String height = videoEl.attr("height");
+      for (Node sourceEl : videoEl.select("source[src]")) {
         Video.Builder videoBuilder = Video.newBuilder()
-            .setVideoSource(sourceNode.getAttributeValue("src"));
-        if (sourceNode.hasAttribute("type")) {
-          videoBuilder.setType(sourceNode.getAttributeValue("type"));
+            .setVideoSource(sourceEl.attr("src"));
+        if (sourceEl.hasAttr("type")) {
+          videoBuilder.setType(sourceEl.attr("type"));
         } else {
           videoBuilder.setType("unknown");
         }
@@ -141,15 +141,15 @@ public class Interpreter {
    * Advanced method: If we already have the data from the URL, use this method
    * to interpret the web page using said data.
    */
-  public static InterpretedData interpret(Url url, DocumentNode documentNode)
-      throws FetchException, ParserException, RequiredFieldException {
+  public static InterpretedData interpret(Url url, Document document)
+      throws FetchException, RequiredFieldException {
 
     // Parse the article and any links it contains.
-    Article article = ArticleCreator.create(url, documentNode);
-    Iterable<String> urls = UrlFinder.findUrls(documentNode);
+    Article article = ArticleCreator.create(url, document);
+    Iterable<String> urls = UrlFinder.findUrls(document);
 
     // Are there videos?
-    Iterable<Video> videos = getVideos(documentNode, urls);
+    Iterable<Video> videos = getVideos(document, urls);
     if (!Iterables.isEmpty(videos)) {
       article = article.toBuilder().addAllVideo(videos).build();
     }
@@ -161,7 +161,7 @@ public class Interpreter {
   }
 
   public static void main(String args[])
-      throws FetchException, ParserException, RequiredFieldException {
+      throws FetchException, RequiredFieldException {
     if (args.length != 1 || !args[0].startsWith("http")) {
       System.out.println("Tell us what URL to interpret please... and only 1!");
     }

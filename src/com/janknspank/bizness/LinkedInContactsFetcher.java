@@ -4,15 +4,16 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import com.google.common.collect.Maps;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.UserProto.LinkedInContact;
 
 public class LinkedInContactsFetcher {
   private static final String CONNECTIONS_URL = "https://api.linkedin.com/v1/people/~/connections";
 
-  private final Future<DocumentNode> linkedInConnectionsDocumentFuture;
+  private final Future<Document> linkedInConnectionsDocumentFuture;
 
   public LinkedInContactsFetcher(String linkedInAccessToken) {
     linkedInConnectionsDocumentFuture =
@@ -24,7 +25,7 @@ public class LinkedInContactsFetcher {
    * connections.
    */
   public Iterable<LinkedInContact> getLinkedInContacts() throws BiznessException {
-    DocumentNode linkedInConnectionsDocument;
+    Document linkedInConnectionsDocument;
     try {
       linkedInConnectionsDocument = linkedInConnectionsDocumentFuture.get();
     } catch (InterruptedException | ExecutionException e) {
@@ -32,18 +33,18 @@ public class LinkedInContactsFetcher {
     }
 
     Map<String, LinkedInContact> linkedInContactsMap = Maps.newHashMap();
-    for (Node personNode : linkedInConnectionsDocument.findAll("person")) {
+    for (Element personEl : linkedInConnectionsDocument.select("person")) {
       StringBuilder nameBuilder = new StringBuilder();
-      Node firstNameNode = personNode.findFirst("first-name");
-      if (firstNameNode != null) {
-        nameBuilder.append(firstNameNode.getFlattenedText());
+      Element firstNameEl = personEl.select("first-name").first();
+      if (firstNameEl != null) {
+        nameBuilder.append(firstNameEl.text());
       }
-      Node lastNameNode = personNode.findFirst("last-name");
-      if (lastNameNode != null) {
-        if (firstNameNode != null) {
+      Element lastNameEl = personEl.select("last-name").first();
+      if (lastNameEl != null) {
+        if (lastNameEl != null) {
           nameBuilder.append(" ");
         }
-        nameBuilder.append(lastNameNode.getFlattenedText());
+        nameBuilder.append(lastNameEl.text());
       }
       String name = nameBuilder.toString();
       linkedInContactsMap.put(name, LinkedInContact.newBuilder().setName(name).build());

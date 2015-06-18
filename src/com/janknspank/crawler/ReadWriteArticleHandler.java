@@ -1,16 +1,13 @@
 package com.janknspank.crawler;
 
-import java.io.StringReader;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import com.google.common.base.Strings;
-import com.janknspank.dom.parser.DocumentBuilder;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.Fetcher;
 
@@ -20,16 +17,16 @@ import com.janknspank.fetch.Fetcher;
 public class ReadWriteArticleHandler {
   private static final Fetcher FETCHER = new Fetcher();
 
-  public static boolean isReadWriteArticle(DocumentNode documentNode) {
-    String url = Strings.nullToEmpty(documentNode.getUrl());
+  public static boolean isReadWriteArticle(Document document) {
+    String url = Strings.nullToEmpty(document.baseUri());
     return url.startsWith("http://readwrite.com/")
         || url.startsWith("https://readwrite.com/");
   }
 
-  public static DocumentNode getRealDocumentNode(final DocumentNode documentNode)
+  public static Document getRealDocument(final Document document)
       throws RequiredFieldException {
-    String pageUrl = documentNode.getUrl();
-    if (!isReadWriteArticle(documentNode)) {
+    String pageUrl = document.baseUri();
+    if (!isReadWriteArticle(document)) {
       throw new RequiredFieldException("Invalid site URL for ReadWriteParagraphFinder: " + pageUrl);
     }
 
@@ -41,7 +38,7 @@ public class ReadWriteArticleHandler {
       JSONObject responseObj = new JSONObject(response);
       JSONArray entries = responseObj.getJSONArray("entries");
       JSONObject articleObj = entries.getJSONObject(0);
-      return DocumentBuilder.build(pageUrl, new StringReader(
+      return Jsoup.parse(
           "<html>"
           + "<head>"
           + "<title>" + StringEscapeUtils.escapeHtml4(articleObj.getString("title")) + "</title>"
@@ -53,9 +50,10 @@ public class ReadWriteArticleHandler {
           + "<body>"
           + articleObj.getString("bodyTml")
           + "</body>"
-          + "</html>"));
-    } catch (JSONException | ParserException e) {
-      throw new RequiredFieldException("Could not parse article contents", e);
+          + "</html>",
+          pageUrl);
+    } catch (JSONException e) {
+      throw new RequiredFieldException("Unexpected JSON problem", e);
     } catch (FetchException e) {
       throw new RequiredFieldException("Could not fetch article contents", e);
     }

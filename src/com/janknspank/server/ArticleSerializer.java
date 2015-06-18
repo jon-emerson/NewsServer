@@ -28,7 +28,6 @@ import com.janknspank.crawler.RequiredFieldException;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.Serializer;
-import com.janknspank.dom.parser.ParserException;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.nlp.KeywordCanonicalizer;
 import com.janknspank.proto.ArticleProto.Article;
@@ -263,7 +262,7 @@ public class ArticleSerializer {
   }
 
   public static void main(String args[])
-      throws DatabaseSchemaException, FetchException, ParserException, RequiredFieldException,
+      throws DatabaseSchemaException, FetchException, RequiredFieldException,
           DatabaseRequestException, BiznessException {
     User user = Users.getByEmail(args[0]);
     User user2 = Users.getByUserId(args[0]);

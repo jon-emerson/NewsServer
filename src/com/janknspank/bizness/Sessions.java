@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Base64;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.janknspank.common.Asserts;
@@ -11,8 +13,6 @@ import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
 import com.janknspank.database.QueryOption;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.proto.CoreProto.Session;
 import com.janknspank.proto.UserProto.User;
 import com.janknspank.server.RequestException;
@@ -35,11 +35,11 @@ public class Sessions {
    * Officially sanctioned method for getting a user session from a LinkedIn
    * profile response.
    */
-  public static Session createFromLinkedProfile(DocumentNode linkedInProfileDocument, User user)
+  public static Session createFromLinkedProfile(Document linkedInProfileDocument, User user)
       throws BiznessException, DatabaseSchemaException {
     // Validate the data looks decent.
-    Node emailNode = linkedInProfileDocument.findFirst("email-address");
-    if (emailNode == null) {
+    Element emailEl = linkedInProfileDocument.select("email-address").first();
+    if (emailEl == null) {
       throw new BiznessException("Could not get email from LinkedIn profile");
     }
 

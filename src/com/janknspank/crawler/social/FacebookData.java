@@ -35,8 +35,8 @@ public class FacebookData {
     }
   }
 
-  public static Long getPublishTime(Url url) throws SocialException {
-    String encodedURL = encodeUrl(url.getUrl());
+  public static Long getPublishTime(String urlString) throws SocialException {
+    String encodedURL = encodeUrl(urlString);
     JsonObject urlObject = getCrawlerClient().fetchObject(encodedURL, JsonObject.class);
     if (urlObject != null
         && urlObject.has("og_object")
@@ -113,6 +113,6 @@ public class FacebookData {
     System.out.println(getPublishTime(Url.newBuilder()
         .setUrl("http://firstround.com/review/Top-Hacks-from-a-PM-Behind-Two-of"
             + "-Techs-Hottest-Products/")
-        .build()));
+        .toString()));
   }
 }

@@ -1,8 +1,6 @@
 package com.janknspank.bizness;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,6 +12,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletResponse;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
@@ -38,9 +40,7 @@ import com.janknspank.classifier.FeatureId;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.dom.parser.DocumentBuilder;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
+import com.janknspank.fetch.Fetcher;
 import com.janknspank.proto.CoreProto.Entity;
 import com.janknspank.proto.CoreProto.Entity.Source;
 import com.janknspank.proto.UserProto.Interest;
@@ -48,8 +48,8 @@ import com.janknspank.proto.UserProto.Interest.InterestSource;
 import com.janknspank.proto.UserProto.Interest.InterestType;
 import com.janknspank.proto.UserProto.LinkedInProfile;
 import com.janknspank.proto.UserProto.LinkedInProfile.Employer;
-import com.janknspank.proto.UserProto.User.AuthenticationService;
 import com.janknspank.proto.UserProto.User;
+import com.janknspank.proto.UserProto.User.AuthenticationService;
 import com.janknspank.proto.UserProto.UserOrBuilder;
 import com.janknspank.server.RequestException;
 
@@ -62,7 +62,7 @@ public class LinkedInLoginHandler {
       + ")";
 
   private final String linkedInAccessToken;
-  private final Future<DocumentNode> linkedInProfileDocumentFuture;
+  private final Future<Document> linkedInProfileDocumentFuture;
   private User updatedUser = null;
 
   public LinkedInLoginHandler(String linkedInAccessToken) {
@@ -111,7 +111,7 @@ public class LinkedInLoginHandler {
     return updatedUser;
   }
 
-  public DocumentNode getLinkedInProfileDocument() throws BiznessException, RequestException {
+  public Document getLinkedInProfileDocument() throws BiznessException, RequestException {
     try {
       return linkedInProfileDocumentFuture.get();
     } catch (ExecutionException|InterruptedException e) {
@@ -133,7 +133,7 @@ public class LinkedInLoginHandler {
     System.out.println("Entered getUpdatedUser");
     try {
       // Get the user's email address from the LinkedIn profile response.
-      DocumentNode linkedInProfileDocument = linkedInProfileDocumentFuture.get();
+      Document linkedInProfileDocument = linkedInProfileDocumentFuture.get();
       long startTime = System.currentTimeMillis();
       System.out.println("Processing profile...");
 
@@ -146,8 +146,8 @@ public class LinkedInLoginHandler {
         isNewUser = true;
         userBuilder = getNewUserBuilder(email);
       }
-      userBuilder.setFirstName(linkedInProfileDocument.findFirst("first-name").getFlattenedText());
-      userBuilder.setLastName(linkedInProfileDocument.findFirst("last-name").getFlattenedText());
+      userBuilder.setFirstName(linkedInProfileDocument.select("first-name").first().text());
+      userBuilder.setLastName(linkedInProfileDocument.select("last-name").first().text());
 
       System.out.println("Read existing user: " + (System.currentTimeMillis() - startTime) + "ms");
 
@@ -200,26 +200,26 @@ public class LinkedInLoginHandler {
     }
   }
 
-  private static String getEmail(DocumentNode linkedInProfileDocument) throws BiznessException {
-    Node emailNode = linkedInProfileDocument.findFirst("email-address");
-    if (emailNode == null) {
+  private static String getEmail(Document linkedInProfileDocument) throws BiznessException {
+    Element emailEl = linkedInProfileDocument.select("email-address").first();
+    if (emailEl == null) {
       throw new BiznessException("Could not get email from LinkedIn profile");
     }
-    return emailNode.getFlattenedText();
+    return emailEl.text();
   }
 
-  private static String getLinkedInProfilePhotoUrl(DocumentNode linkedInProfileDocument) {
-    Node pictureNode = linkedInProfileDocument.findFirst("picture-url");
-    return (pictureNode == null) ? null : pictureNode.getFlattenedText();
+  private static String getLinkedInProfilePhotoUrl(Document linkedInProfileDocument) {
+    Element pictureEl = linkedInProfileDocument.select("picture-url").first();
+    return (pictureEl == null) ? null : pictureEl.text();
   }
 
   /**
    * Constructs a new LinkedInProfile object for the current user, given their
    * LinkedIn Profile document object.
    */
-  private LinkedInProfile createLinkedInProfile(DocumentNode linkedInProfileDocument) {
+  private LinkedInProfile createLinkedInProfile(Document linkedInProfileDocument) {
     LinkedInProfile.Builder linkedInProfileBuilder = LinkedInProfile.newBuilder()
-        .setData(linkedInProfileDocument.toLiteralString())
+        .setData(linkedInProfileDocument.outerHtml())
         .setCreateTime(System.currentTimeMillis());
     List<Employer> employers = getEmployers(linkedInProfileDocument);
     if (employers.size() > 0) {
@@ -236,19 +236,19 @@ public class LinkedInLoginHandler {
    * descending.
    */
   @VisibleForTesting
-  static List<Employer> getEmployers(DocumentNode linkedInProfileDocument) {
+  static List<Employer> getEmployers(Document linkedInProfileDocument) {
     List<Employer> employers = Lists.newArrayList();
-    for (Node node : linkedInProfileDocument.findAll("positions > position")) {
+    for (Element element : linkedInProfileDocument.select("positions > position")) {
       Employer.Builder builder = Employer.newBuilder();
-      builder.setName(node.findFirst("company > name").getFlattenedText());
-      builder.setTitle(node.findFirst("title").getFlattenedText());
-      Long startTime = makeDate(node.findFirst("startDate > year"),
-          node.findFirst("startDate > month"));
+      builder.setName(element.select("company > name").first().text());
+      builder.setTitle(element.select("title").first().text());
+      Long startTime = makeDate(element.select("startDate > year").first(),
+          element.select("startDate > month").first());
       if (startTime != null) {
         builder.setStartTime(startTime);
       }
-      Long endTime = makeDate(node.findFirst("endDate > year"),
-          node.findFirst("endDate > month"));
+      Long endTime = makeDate(element.select("endDate > year").first(),
+          element.select("endDate > month").first());
       if (endTime != null) {
         builder.setEndTime(endTime);
       }
@@ -271,7 +271,7 @@ public class LinkedInLoginHandler {
    * the user's latest LinkedIn API response documents.
    */
   private Iterable<Interest> getUpdatedInterests(UserOrBuilder user,
-      DocumentNode linkedInProfileDocument) {
+      Document linkedInProfileDocument) {
     Interest linkedInContactInterest = null;
     final Set<Integer> userIndustryFeatureIds = new HashSet<>();
     final Set<Interest> tombstonedEntityInterests = new HashSet<>();
@@ -329,10 +329,10 @@ public class LinkedInLoginHandler {
    * Returns an FeatureId representing the current Industry specified in the passed
    * LinkedIn profile.
    */
-  private FeatureId getLinkedInIndustryFeature(DocumentNode linkedInProfileDocument) {
-    Node headlineNode = linkedInProfileDocument.findFirst("headline");
-    if (headlineNode != null) {
-      String headline = headlineNode.getFlattenedText().toLowerCase();
+  private FeatureId getLinkedInIndustryFeature(Document linkedInProfileDocument) {
+    Element headlineEl = linkedInProfileDocument.select("headline").first();
+    if (headlineEl != null) {
+      String headline = headlineEl.text().toLowerCase();
       if (headline.startsWith("ux ")
           || headline.contains(" ux ")
           || (headline.contains("ux") && headline.contains("design"))
@@ -347,9 +347,9 @@ public class LinkedInLoginHandler {
         return FeatureId.ELECTRICAL_ENGINEERING;
       }
     }
-    Node industryNode = linkedInProfileDocument.findFirst("industry");
-    if (industryNode != null) {
-      return Industry.fromDescription(industryNode.getFlattenedText()).getFeatureId();
+    Element industryEl = linkedInProfileDocument.select("industry").first();
+    if (industryEl != null) {
+      return Industry.fromDescription(industryEl.text()).getFeatureId();
     }
     // Ehh what the hell, let's do this, who doesn't love the Internet? :)
     return FeatureId.INTERNET;
@@ -362,10 +362,10 @@ public class LinkedInLoginHandler {
    * NOTE(jonemerson): Actually, this just does companies for now.  We found
    * that skills and locations added too much noise to the user's stream.
    */
-  private Iterable<Interest> getLinkedInProfileInterests(DocumentNode linkedInProfileDocument) {
+  private Iterable<Interest> getLinkedInProfileInterests(Document linkedInProfileDocument) {
     Set<String> companyNames = Sets.newHashSet();
-    for (Node companyNameNode : linkedInProfileDocument.findAll("position > company > name")) {
-      companyNames.add(companyNameNode.getFlattenedText());
+    for (Element companyNameEl : linkedInProfileDocument.select("position > company > name")) {
+      companyNames.add(companyNameEl.text());
     }
     List<Interest> interests = Lists.newArrayList();
     for (String companyName : companyNames) {
@@ -400,19 +400,19 @@ public class LinkedInLoginHandler {
   /**
    * Parses a Linked In API-style date format to a an epoch time Long.
    */
-  private static Long makeDate(Node year, Node month) {
+  private static Long makeDate(Element year, Element month) {
     if (year == null) {
       return null;
     }
     GregorianCalendar calendar = new GregorianCalendar();
-    calendar.set(Calendar.YEAR, Integer.parseInt(year.getFlattenedText()));
+    calendar.set(Calendar.YEAR, Integer.parseInt(year.text()));
     if (month != null) {
-      calendar.set(Calendar.MONTH, Integer.parseInt(month.getFlattenedText()) - 1);
+      calendar.set(Calendar.MONTH, Integer.parseInt(month.text()) - 1);
     }
     return calendar.getTimeInMillis();
   }
 
-  static Future<DocumentNode> getDocumentFuture(
+  static Future<Document> getDocumentFuture(
       final String url, final String linkedInAccessToken) {
     try {
       final long startTime = System.currentTimeMillis();
@@ -423,10 +423,9 @@ public class LinkedInLoginHandler {
       request.setHeaders(headers);
 
       return Futures.transform(JdkFutureAdapters.listenInPoolThread(request.executeAsync()),
-          new AsyncFunction<HttpResponse, DocumentNode>() {
+          new AsyncFunction<HttpResponse, Document>() {
             @Override
-            public ListenableFuture<DocumentNode> apply(HttpResponse response)
-                throws Exception {
+            public ListenableFuture<Document> apply(HttpResponse response) throws Exception {
               if (response.getStatusCode() != HttpServletResponse.SC_OK) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ByteStreams.copy(response.getContent(), baos);
@@ -437,7 +436,7 @@ public class LinkedInLoginHandler {
               System.out.println(
                   "Received " + url + " in " + (System.currentTimeMillis() - startTime) + "ms");
               return Futures.immediateFuture(
-                  DocumentBuilder.build(url, new InputStreamReader(response.getContent())));
+                  Jsoup.parse(Fetcher.inputStreamToString(response.getContent())));
             }
           });
     } catch (IOException e) {

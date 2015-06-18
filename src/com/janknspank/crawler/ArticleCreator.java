@@ -1,7 +1,5 @@
 package com.janknspank.crawler;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -9,6 +7,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.google.api.client.util.Lists;
 import com.google.common.annotations.VisibleForTesting;
@@ -28,8 +28,6 @@ import com.janknspank.crawler.social.TwitterData;
 import com.janknspank.database.Database;
 import com.janknspank.database.DatabaseRequestException;
 import com.janknspank.database.DatabaseSchemaException;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.nlp.KeywordFinder;
 import com.janknspank.nlp.KeywordUtils;
 import com.janknspank.proto.ArticleProto.Article;
@@ -116,19 +114,19 @@ class ArticleCreator {
   // generally worse.  You either want this value to be 4 or 10+.
   private static final int MAX_STEM_LENGTH = 4;
 
-  public static Article create(Url url, DocumentNode documentNode)
+  public static Article create(Url url, Document document)
       throws RequiredFieldException {
-    SiteManifest site = SiteManifests.getForUrl(documentNode.getUrl());
+    SiteManifest site = SiteManifests.getForUrl(document.baseUri());
 
     Article.Builder articleBuilder = Article.newBuilder();
     articleBuilder.setUrlId(url.getId());
-    articleBuilder.setUrl(documentNode.getUrl());
+    articleBuilder.setUrl(document.baseUri());
 
     // Paragraphs (required).
-    articleBuilder.addAllParagraph(ParagraphFinder.getParagraphs(documentNode));
+    articleBuilder.addAllParagraph(ParagraphFinder.getParagraphs(document));
 
     // Author.
-    String author = getAuthor(documentNode);
+    String author = getAuthor(document);
     if (author != null) {
       articleBuilder.setAuthor(author);
     }
@@ -139,44 +137,44 @@ class ArticleCreator {
       articleBuilder.setOrigin(origin);
     }
     // Copyright.
-    String copyright = getCopyright(documentNode);
+    String copyright = getCopyright(document);
     if (copyright != null) {
       articleBuilder.setCopyright(copyright);
     }
 
     // Description (required).
-    articleBuilder.setDescription(getDescription(documentNode, site));
+    articleBuilder.setDescription(getDescription(document, site));
 
     // Image url.
-    String imageUrl = getImageUrl(documentNode);
+    String imageUrl = getImageUrl(document);
     if (imageUrl != null) {
       articleBuilder.setImageUrl(imageUrl);
     }
 
     // Modified time.
-    Long modifiedTime = getModifiedTime(documentNode);
+    Long modifiedTime = getModifiedTime(document);
     if (modifiedTime != null) {
       articleBuilder.setModifiedTime(modifiedTime);
     }
 
     // Published time (required).
     articleBuilder.setPublishedTime(
-        Math.min(System.currentTimeMillis(), getPublishedTime(documentNode, url)));
+        Math.min(System.currentTimeMillis(), getPublishedTime(document, url)));
 
     // Title.
-    String title = getTitle(documentNode, site);
+    String title = getTitle(document, site);
     if (title != null) {
       articleBuilder.setTitle(title);
     }
 
     // Type.
-    String type = getType(documentNode);
+    String type = getType(document);
     if (type != null) {
       articleBuilder.setType(type);
     }
 
     // Word count (required).
-    articleBuilder.setWordCount(getWordCount(documentNode));
+    articleBuilder.setWordCount(getWordCount(document));
 
     // Features
     Iterable<ArticleFeature> articleFeatures;
@@ -190,7 +188,7 @@ class ArticleCreator {
 
     // Keywords.
     articleBuilder.addAllKeyword(KeywordFinder.getInstance().findKeywords(
-        url.getId(), title, documentNode, articleFeatures));
+        url.getId(), title, document, articleFeatures));
 
     // Since many sites double-escape their HTML entities (why anyone would
     // do this is beyond me), do another escape pass on everything.
@@ -235,9 +233,9 @@ class ArticleCreator {
     return articleBuilder.build();
   }
 
-  public static String getAuthor(DocumentNode documentNode) {
-    Node metaNode = documentNode.findFirst("html > head meta[name=\"author\"]");
-    return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
+  public static String getAuthor(Document document) {
+    Element metaNode = document.select("html > head meta[name=\"author\"]").first();
+    return (metaNode != null) ? metaNode.attr("content") : null;
   }
 
   public static String getOrigin(SiteManifest site, String author) {
@@ -246,14 +244,14 @@ class ArticleCreator {
         : site.getShortName();
   }
 
-  public static String getCopyright(DocumentNode documentNode) {
-    Node metaNode = documentNode.findFirst("html > head meta[name=\"copyright\"]");
-    return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
+  public static String getCopyright(Document document) {
+    Element metaNode = document.select("html > head meta[name=\"copyright\"]").first();
+    return (metaNode != null) ? metaNode.attr("content") : null;
   }
 
-  private static String getFirstSignificantParagraphText(DocumentNode documentNode)
+  private static String getFirstSignificantParagraphText(Document document)
       throws RequiredFieldException {
-    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(documentNode);
+    Iterable<String> paragraphs = ParagraphFinder.getParagraphs(document);
     String bestBaragraph = "";
     for (String paragraph : paragraphs) {
       if (paragraph.length() >= 50) {
@@ -266,13 +264,13 @@ class ArticleCreator {
         : bestBaragraph;
   }
 
-  public static String getDescription(DocumentNode documentNode, SiteManifest site)
+  public static String getDescription(Document document, SiteManifest site)
       throws RequiredFieldException {
     if (site.getUseFirstParagraphAsDescription()) {
-      return getFirstSignificantParagraphText(documentNode);
+      return getFirstSignificantParagraphText(document);
     }
 
-    Node metaNode = documentNode.findFirst(ImmutableList.of(
+    Element metaEl = JsoupUtils.selectFirst(document, ImmutableList.of(
         "html > head meta[name=\"sailthru.description\"]", // Best, at least on techcrunch.com.
         "html > head meta[name=\"description\"]",
         "html > head meta[name=\"lp\"]",
@@ -280,29 +278,20 @@ class ArticleCreator {
         "html > head meta[property=\"og:description\"]",
         "html > head meta[itemprop=\"description\"]"));
     String description = null;
-    if (metaNode != null) {
-      description = metaNode.getAttributeValue("content");
+    if (metaEl != null) {
+      description = metaEl.attr("content");
     }
     if (Strings.isNullOrEmpty(description)) {
       // Fall back to the first significant paragraph.
-      description = getFirstSignificantParagraphText(documentNode);
+      description = getFirstSignificantParagraphText(document);
     }
 
     if (description.length() > MAX_DESCRIPTION_LENGTH) {
-      System.out.println("Warning: Trimming description for url " + documentNode.getUrl());
+      System.out.println("Warning: Trimming description for url " + document.baseUri());
       description = description.substring(0, MAX_DESCRIPTION_LENGTH - 1) + "\u2026";
     }
 
     return description.trim();
-  }
-
-  private static String resolveImageUrl(DocumentNode documentNode, String relativeUrl) {
-    try {
-      return new URL(
-          new URL(documentNode.getUrl()), Strings.nullToEmpty(relativeUrl).trim()).toString();
-    } catch (MalformedURLException e) {
-      return "";
-    }
   }
 
   @VisibleForTesting
@@ -327,16 +316,16 @@ class ArticleCreator {
    * - 1 - 100: Probably crap but worth considering.
    * - Below 0: Not a valid URL.
    */
-  private static int getImageUrlRank(DocumentNode documentNode, Node metaNode) {
-    String imageUrl = resolveImageUrl(documentNode, metaNode.getAttributeValue("content"));
+  private static int getImageUrlRank(Document document, Element metaEl) {
+    String imageUrl = metaEl.absUrl("content");
 
     // Disallow empty and blacklisted URLs.
     if (!isValidImageUrl(imageUrl)) {
       return -1;
     }
 
-    String documentUrl = documentNode.getUrl();
-    if (documentUrl.contains(".nytimes.com/")) {
+    String urlString = document.baseUri();
+    if (urlString.contains(".nytimes.com/")) {
       if (imageUrl.contains("-facebookJumbo")) {
         return 1000;
       }
@@ -348,13 +337,13 @@ class ArticleCreator {
     // Once in a while we're graced with this information - super valuable!
     // TODO(jonemerson): Sometimes the width is specified in the thumbnail URL.
     // E.g. on techcrunch.com, it's done with the "w" parameter.
-    int width = NumberUtils.toInt(metaNode.getAttributeValue("width"), 0);
+    int width = NumberUtils.toInt(metaEl.attr("width"), 0);
     if (width > 100) {
       return Math.min(1000, width);
     }
 
     // Sailthru metadata tends to be very high quality.
-    if ("sailthru.image.full".equals(metaNode.getAttributeValue("name"))) {
+    if ("sailthru.image.full".equals(metaEl.attr("name"))) {
       return 500;
     }
 
@@ -363,19 +352,19 @@ class ArticleCreator {
     return Math.min(120, imageUrl.length()) - 20;
   }
 
-  public static String getImageUrl(DocumentNode documentNode) {
+  public static String getImageUrl(Document document) {
     String bestUrl = "";
     int bestUrlRank = 0;
-    for (Node metaNode : documentNode.findAll(ImmutableList.of(
+    for (Element metaEl : JsoupUtils.selectAll(document, ImmutableList.of(
         "html > head meta[name=\"thumbnail\"]",
         "html > head meta[name=\"THUMBNAIL_URL\"]",
         "html > head meta[name=\"sailthru.image.full\"]",
         "html > head meta[property=\"og:image\"]",
         "html > head meta[property=\"rnews:thumbnailUrl\"]",
         "html > head meta[itemprop=\"thumbnailUrl\"]"))) {
-      int rank = getImageUrlRank(documentNode, metaNode);
+      int rank = getImageUrlRank(document, metaEl);
       if (rank > bestUrlRank) {
-        bestUrl = resolveImageUrl(documentNode, metaNode.getAttributeValue("content"));
+        bestUrl = metaEl.absUrl("content");
         bestUrlRank = rank;
       }
     }
@@ -383,29 +372,29 @@ class ArticleCreator {
     if (bestUrl.isEmpty()) {
       // TODO(jonemerson): Probably surface this through .manifest files.
       // This is probably specific to ribaj.com.
-      Node maybeImageNode = documentNode.findFirst(".article-content figure img");
-      if (maybeImageNode != null) {
-        bestUrl = resolveImageUrl(documentNode, maybeImageNode.getAttributeValue("src"));
+      Element maybeImageEl = document.select(".article-content figure img").first();
+      if (maybeImageEl != null) {
+        bestUrl = maybeImageEl.absUrl("src");
       }
     }
     return bestUrl.isEmpty() ? null : bestUrl;
   }
 
-  public static Long getModifiedTime(DocumentNode documentNode)
+  public static Long getModifiedTime(Document document)
       throws RequiredFieldException {
-    Node metaNode = documentNode.findFirst(ImmutableList.of(
+    Element metaEl = JsoupUtils.selectFirst(document, ImmutableList.of(
         "html > head meta[name=\"utime\"]",
         "html > head meta[itemprop=\"modificationDate\"]",
         "html > head meta[property=\"article:modified_time\"]",
         "html > head meta[itemprop=\"dateModified\"]"));
-    return (metaNode != null)
-        ? DateParser.parseDateTime(metaNode.getAttributeValue("content")) : null;
+    return (metaEl != null)
+        ? DateParser.parseDateTime(metaEl.attr("content")) : null;
   }
 
-  public static int getWordCount(final DocumentNode documentNode) throws RequiredFieldException {
+  public static int getWordCount(final Document document) throws RequiredFieldException {
     Pattern pattern = Pattern.compile("[\\s]+");
     int words = 0;
-    for (String paragraph : ParagraphFinder.getParagraphs(documentNode)) {
+    for (String paragraph : ParagraphFinder.getParagraphs(document)) {
       Matcher matcher = pattern.matcher(paragraph);
       while (matcher.find()) {
         words++;
@@ -415,8 +404,8 @@ class ArticleCreator {
     return words;
   }
 
-  public static long getPublishedTime(DocumentNode documentNode, Url url) throws RequiredFieldException {
-    Node metaNode = documentNode.findFirst(ImmutableList.of(
+  public static long getPublishedTime(Document document, Url url) throws RequiredFieldException {
+    Element metaEl = JsoupUtils.selectFirst(document, ImmutableList.of(
         "html > head meta[name=\"ptime\"]", // Usually very precise.
         "html > head meta[name=\"date\"]",
         "html > head meta[name=\"Date\"]", // Abcnews.go.com.
@@ -434,17 +423,17 @@ class ArticleCreator {
         "html > head meta[name=\"DC.date.issued\"]", // Abcnews.go.com.
         "html meta[itemprop=\"datePublished\"]", // Cbsnews.com.
         "html > head meta[name=\"live_date\"]")); // Pcmag.com.
-    if (metaNode != null && metaNode.hasAttribute("content")) {
-      return DateParser.parseDateTime(metaNode.getAttributeValue("content"));
-    } else if (metaNode != null && metaNode.hasAttribute("value")) {
-      return DateParser.parseDateTime(metaNode.getAttributeValue("value"));
+    if (metaEl != null && metaEl.hasAttr("content")) {
+      return DateParser.parseDateTime(metaEl.attr("content"));
+    } else if (metaEl != null && metaEl.hasAttr("value")) {
+      return DateParser.parseDateTime(metaEl.attr("value"));
     }
 
     // Special handling for spectrum.ieee.org.
-    if (url.getUrl().startsWith("http://spectrum.ieee.org/")) {
-      Node dateTimeNode = documentNode.findFirst(".metadata label[datetime]");
-      if (dateTimeNode != null) {
-        return DateParser.parseDateTime(dateTimeNode.getFlattenedText());
+    if (document.baseUri().startsWith("http://spectrum.ieee.org/")) {
+      Element dateTimeEl = document.select(".metadata label[datetime]").first();
+      if (dateTimeEl != null) {
+        return DateParser.parseDateTime(dateTimeEl.text());
       }
     }
 
@@ -452,25 +441,25 @@ class ArticleCreator {
     // E.g.
     // <time pubdate="pubdate" datetime="Fri Feb 27 2015 17:30:00 GMT+0000 (UTC)">
     //     27 February 2015</time>
-    Node timeNode = documentNode.findFirst("time");
-    if (timeNode != null) {
-      Long maybeDate = DateParser.parseDateTime(timeNode.getFlattenedText());
+    Element timeEl = document.select("time").first();
+    if (timeEl != null) {
+      Long maybeDate = DateParser.parseDateTime(timeEl.text());
       if (maybeDate != null) {
         return maybeDate;
       }
     }
 
     // See if we can parse a date out of the URL.
-    Long date = DateParser.parseDateFromUrl(documentNode.getUrl(), true /* allowMonth */);
+    Long date = DateParser.parseDateFromUrl(document.baseUri(), true /* allowMonth */);
     if (date != null) {
       return date;
     }
 
     // See if we can derive the date from the article contents.
     // NOTE(jonemerson): Maybe we can do this more heuristically.
-    for (Node copyrightNode : documentNode.findAll("body .copyright")) {
+    for (Element copyrightEl : document.select("body .copyright")) {
       Matcher matcher = Pattern.compile("(0?[1-9]|1[012])\\.[0123]?[0-9]\\.20[0-9]{2}")
-          .matcher(copyrightNode.getFlattenedText());
+          .matcher(copyrightEl.text());
       if (matcher.find()) {
         date = DateParser.parseDateTime(matcher.group());
         if (date != null) {
@@ -482,7 +471,7 @@ class ArticleCreator {
     // Geez, they're making it hard on us.  Why doesn't everyone just tell us
     // when their articles are published??  OK, let's ask Facebook...
     try {
-      Long facebookPublishTime = FacebookData.getPublishTime(url);
+      Long facebookPublishTime = FacebookData.getPublishTime(document.baseUri());
       if (facebookPublishTime != null) {
         return facebookPublishTime;
       }
@@ -518,22 +507,22 @@ class ArticleCreator {
     return title.trim();
   }
 
-  public static String getTitle(DocumentNode documentNode, SiteManifest site)
+  public static String getTitle(Document document, SiteManifest site)
       throws RequiredFieldException {
     // First, see if the manifest tells us a specific place to check.
     if (site != null && site.getTitleSelectorCount() > 0) {
-      Node titleNode = documentNode.findFirst(site.getTitleSelectorList());
-      if (titleNode != null) {
-        return cleanTitle(titleNode.getFlattenedText());
+      Element titleEl = JsoupUtils.selectFirst(document, site.getTitleSelectorList());
+      if (titleEl != null) {
+        return cleanTitle(titleEl.text());
       }
     }
 
     // For most sites, we can get it from the meta keywords.  For
     // advice.careerbuilder.com, the meta keywords are crap, so we skip this
     // step.
-    if (!documentNode.getUrl().contains("//advice.careerbuilder.com/")
-        && !documentNode.getUrl().contains("//www.bhorowitz.com/")) {
-      Node metaNode = documentNode.findFirst(ImmutableList.of(
+    if (!document.baseUri().contains("//advice.careerbuilder.com/")
+        && !document.baseUri().contains("//www.bhorowitz.com/")) {
+      Element metaEl = JsoupUtils.selectFirst(document, ImmutableList.of(
           "html > head meta[name=\"fb_title\"]",
           "html > head meta[name=\"hdl\"]",
           "html > head meta[name=\"Headline\"]",
@@ -541,23 +530,23 @@ class ArticleCreator {
           "html > head meta[property=\"og:title\"]",
           "html > head meta[property=\"rnews:headline\"]",
           "html > head meta[itemprop=\"alternativeHeadline\"]"));
-      if (metaNode != null) {
-        return cleanTitle(metaNode.getAttributeValue("content"));
+      if (metaEl != null) {
+        return cleanTitle(metaEl.attr("content"));
       }
     }
 
     // Failover to <title> tag.
-    Node titleNode = documentNode.findFirst("title");
-    if (titleNode != null) {
-      return cleanTitle(StringHelper.unescape(titleNode.getFlattenedText()));
+    Element titleEl = document.select("title").first();
+    if (titleEl != null) {
+      return cleanTitle(StringHelper.unescape(titleEl.text()));
     }
 
     throw new RequiredFieldException("Could not find required field: title");
   }
 
-  public static String getType(DocumentNode documentNode) {
-    Node metaNode = documentNode.findFirst("html > head meta[property=\"og:type\"]");
-    return (metaNode != null) ? metaNode.getAttributeValue("content") : null;
+  public static String getType(Document document) {
+    Element metaEl = document.select("html > head meta[property=\"og:type\"]").first();
+    return (metaEl != null) ? metaEl.attr("content") : null;
   }
 
   @VisibleForTesting

@@ -10,10 +10,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.google.common.base.Joiner;
 import com.janknspank.crawler.ParagraphFinder;
-import com.janknspank.dom.parser.DocumentNode;
-import com.janknspank.dom.parser.Node;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
@@ -49,10 +51,10 @@ public class GrabTrainingData {
     }
   }
 
-  private DocumentNode getDocumentNode(String url) throws FetchException {
+  private Document getDocument(String url) throws FetchException {
     FetchResponse fetchResponse = FETCHER.get(url);
     if (fetchResponse.getStatusCode() == HttpServletResponse.SC_OK) {
-      return fetchResponse.getDocumentNode();
+      return fetchResponse.getDocument();
     } else {
       throw new FetchException("Could not read web site");
     }
@@ -63,8 +65,8 @@ public class GrabTrainingData {
 
     for (String url : URLS) {
       // Get all the paragraphs.
-      List<Node> paragraphs =
-          ParagraphFinder.getParagraphNodes(grabTrainingData.getDocumentNode(url));
+      Elements paragraphs =
+          ParagraphFinder.getParagraphEls(grabTrainingData.getDocument(url));
 
       // Open a file for writing all the paragraphs and sentences.
       String filename = url;
@@ -98,8 +100,8 @@ public class GrabTrainingData {
       writer.newLine();
 
       // Write out all the sentences, tokenized.
-      for (Node paragraph : paragraphs) {
-        String paragraphText = paragraph.getFlattenedText();
+      for (Element paragraph : paragraphs) {
+        String paragraphText = paragraph.text();
         for (String sentence : KeywordFinder.getInstance().getSentences(paragraphText)) {
           boolean first = true;
           for (String token : KeywordFinder.getInstance().getTokens(sentence)) {
