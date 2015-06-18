@@ -17,6 +17,7 @@ import org.jsoup.nodes.Node;
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.janknspank.database.Database;
 import com.janknspank.fetch.FetchException;
 import com.janknspank.fetch.FetchResponse;
 import com.janknspank.fetch.Fetcher;
@@ -32,6 +33,8 @@ import com.janknspank.proto.CoreProto.Url;
  */
 public class Interpreter {
   private static final Fetcher FETCHER = new Fetcher();
+  private static final int MAX_VIDEO_SOURCE_LENGTH =
+      Database.getStringLength(Video.class, "video_source");
 
   // YouTube URL matcher.  Supports:
   // http://youtu.be/sBakqLUBWP0
@@ -117,20 +120,22 @@ public class Interpreter {
       String width = videoEl.attr("width");
       String height = videoEl.attr("height");
       for (Node sourceEl : videoEl.select("source[src]")) {
-        Video.Builder videoBuilder = Video.newBuilder()
-            .setVideoSource(sourceEl.attr("src"));
-        if (sourceEl.hasAttr("type")) {
-          videoBuilder.setType(sourceEl.attr("type"));
-        } else {
-          videoBuilder.setType("unknown");
+        String source = sourceEl.attr("src");
+        if (source.length() < MAX_VIDEO_SOURCE_LENGTH) {
+          Video.Builder videoBuilder = Video.newBuilder().setVideoSource(source);
+          if (sourceEl.hasAttr("type")) {
+            videoBuilder.setType(sourceEl.attr("type"));
+          } else {
+            videoBuilder.setType("unknown");
+          }
+          if (width != null) {
+            videoBuilder.setWidthPx(NumberUtils.toInt(width, 0));
+          }
+          if (height != null) {
+            videoBuilder.setHeightPx(NumberUtils.toInt(height, 0));
+          }
+          videos.add(videoBuilder.build());
         }
-        if (width != null) {
-          videoBuilder.setWidthPx(NumberUtils.toInt(width, 0));
-        }
-        if (height != null) {
-          videoBuilder.setHeightPx(NumberUtils.toInt(height, 0));
-        }
-        videos.add(videoBuilder.build());
       }
     }
 
