@@ -241,8 +241,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     java.util.List<java.lang.String>
@@ -251,8 +251,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     int getParagraphSelectorCount();
@@ -260,8 +260,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     java.lang.String getParagraphSelector(int index);
@@ -269,8 +269,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -4645,8 +4645,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     public java.util.List<java.lang.String>
@@ -4657,8 +4657,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     public int getParagraphSelectorCount() {
@@ -4668,8 +4668,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     public java.lang.String getParagraphSelector(int index) {
@@ -4679,8 +4679,8 @@ public final class CrawlerProto {
      * <code>repeated string paragraph_selector = 6;</code>
      *
      * <pre>
-     * Any DocumentNode children for articles from this website that match this
-     * CSS-style element selector are considered paragraphs.
+     * Optional: CSS selector for where the paragraphs are on this site.  If not
+     * set, or if this selector doesn't match anything, failover logic is used.
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -6658,8 +6658,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public java.util.List<java.lang.String>
@@ -6670,8 +6670,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public int getParagraphSelectorCount() {
@@ -6681,8 +6681,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public java.lang.String getParagraphSelector(int index) {
@@ -6692,8 +6692,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -6704,8 +6704,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public Builder setParagraphSelector(
@@ -6722,8 +6722,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public Builder addParagraphSelector(
@@ -6740,8 +6740,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public Builder addAllParagraphSelector(
@@ -6755,8 +6755,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public Builder clearParagraphSelector() {
@@ -6769,8 +6769,8 @@ public final class CrawlerProto {
        * <code>repeated string paragraph_selector = 6;</code>
        *
        * <pre>
-       * Any DocumentNode children for articles from this website that match this
-       * CSS-style element selector are considered paragraphs.
+       * Optional: CSS selector for where the paragraphs are on this site.  If not
+       * set, or if this selector doesn't match anything, failover logic is used.
        * </pre>
        */
       public Builder addParagraphSelectorBytes(
@@ -12460,56 +12460,56 @@ public final class CrawlerProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\"com/janknspank/proto/crawler.proto\032(co" +
-      "m/janknspank/database/extensions.proto\"\271" +
+      "m/janknspank/database/extensions.proto\"\265" +
       "\t\n\014SiteManifest\022\034\n\nshort_name\030\020 \001(\tB\010\210\246\035" +
       "\001\230\246\035\024\022\036\n\013root_domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\036\n" +
       "\017aka_root_domain\030\002 \003(\tB\005\230\246\035\377\005\022\034\n\tstart_u" +
       "rl\030\003 \003(\tB\t\210\246\035\001\230\246\035\377\005\022\"\n\023subdomain_blackli" +
       "st\030\004 \003(\tB\005\230\246\035\377\005\0223\n\016path_blacklist\030\005 \003(\0132" +
-      "\033.SiteManifest.PathBlacklist\022%\n\022paragrap" +
-      "h_selector\030\006 \003(\tB\t\210\246\035\001\230\246\035\377\005\022=\n\023paragraph" +
-      "_blacklist\030\016 \003(\0132 .SiteManifest.Paragrap",
-      "hBlacklist\022<\n\023article_url_pattern\030\007 \003(\0132" +
-      "\037.SiteManifest.ArticleUrlPattern\022*\n\033whit" +
-      "elisted_query_parameter\030\010 \003(\tB\005\230\246\035\377\005\022\026\n\007" +
-      "rss_url\030\t \003(\tB\005\230\246\035\377\005\0222\n\021test_instruction" +
-      "s\030\n \001(\0132\021.TestInstructionsB\004\210\246\035\001\022\020\n\010is_h" +
-      "ttps\030\013 \001(\010\022*\n\"use_first_paragraph_as_des" +
-      "cription\030\017 \001(\010\022\035\n\016title_selector\030\014 \003(\tB\005" +
-      "\230\246\035\377\005\022@\n\025feature_boost_pattern\030\r \003(\0132!.S" +
-      "iteManifest.FeatureBoostPattern\032\326\001\n\rPath" +
-      "Blacklist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010",
-      "location\030\004 \001(\0162$.SiteManifest.PathBlackl" +
-      "ist.Location:\013STARTS_WITH\"e\n\010Location\022\n\n" +
-      "\006EQUALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020" +
-      "\003\022\014\n\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX" +
-      "_MATCH\020\006\032H\n\022ParagraphBlacklist\022\027\n\010select" +
-      "or\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\ntext_regex\030\002 \001(\tB\005\230\246\035" +
-      "\377\005\032d\n\021ArticleUrlPattern\022\030\n\tsubdomain\030\001 \001" +
-      "(\tB\005\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013" +
-      "query_regex\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023FeatureBoos" +
-      "tPattern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npa",
-      "th_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001" +
-      "(\tB\005\230\246\035\377\005\022\022\n\nfeature_id\030\004 \001(\005\022\023\n\005boost\030\005" +
-      " \001(\005B\004\210\246\035\001\"\314\002\n\020TestInstructions\022B\n\024url_w" +
-      "hitelist_checks\030\001 \001(\0132$.TestInstructions" +
-      ".UrlWhitelistChecks\022U\n\033article_url_detec" +
-      "tor_checks\030\002 \001(\0132*.TestInstructions.Arti" +
-      "cleUrlDetectorChecksB\004\210\246\035\001\032E\n\022UrlWhiteli" +
-      "stChecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad" +
-      "_url\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDetectorC" +
-      "hecks\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non",
-      "_article_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHisto" +
-      "ry\022\"\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027" +
-      "\n\004host\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022." +
-      "CrawlHistory.Site\022\030\n\nstart_time\030\004 \001(\003B\004\210" +
-      "\246\035\001\022\020\n\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n" +
-      "\017was_interrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_" +
-      "domain\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030\002 " +
-      "\001(\003B\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006millis\030\004 " +
-      "\001(\003\022\036\n\020articles_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030" +
-      "\024MongoDB.CrawlHistoryB$\n\024com.janknspank.",
-      "protoB\014CrawlerProto"
+      "\033.SiteManifest.PathBlacklist\022!\n\022paragrap" +
+      "h_selector\030\006 \003(\tB\005\230\246\035\377\005\022=\n\023paragraph_bla" +
+      "cklist\030\016 \003(\0132 .SiteManifest.ParagraphBla",
+      "cklist\022<\n\023article_url_pattern\030\007 \003(\0132\037.Si" +
+      "teManifest.ArticleUrlPattern\022*\n\033whitelis" +
+      "ted_query_parameter\030\010 \003(\tB\005\230\246\035\377\005\022\026\n\007rss_" +
+      "url\030\t \003(\tB\005\230\246\035\377\005\0222\n\021test_instructions\030\n " +
+      "\001(\0132\021.TestInstructionsB\004\210\246\035\001\022\020\n\010is_https" +
+      "\030\013 \001(\010\022*\n\"use_first_paragraph_as_descrip" +
+      "tion\030\017 \001(\010\022\035\n\016title_selector\030\014 \003(\tB\005\230\246\035\377" +
+      "\005\022@\n\025feature_boost_pattern\030\r \003(\0132!.SiteM" +
+      "anifest.FeatureBoostPattern\032\326\001\n\rPathBlac" +
+      "klist\022\031\n\006needle\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022C\n\010loca",
+      "tion\030\004 \001(\0162$.SiteManifest.PathBlacklist." +
+      "Location:\013STARTS_WITH\"e\n\010Location\022\n\n\006EQU" +
+      "ALS\020\001\022\017\n\013STARTS_WITH\020\002\022\r\n\tENDS_WITH\020\003\022\014\n" +
+      "\010CONTAINS\020\004\022\016\n\nREGEX_FIND\020\005\022\017\n\013REGEX_MAT" +
+      "CH\020\006\032H\n\022ParagraphBlacklist\022\027\n\010selector\030\001" +
+      " \001(\tB\005\230\246\035\377\005\022\031\n\ntext_regex\030\002 \001(\tB\005\230\246\035\377\005\032d" +
+      "\n\021ArticleUrlPattern\022\030\n\tsubdomain\030\001 \001(\tB\005" +
+      "\230\246\035\377\005\022\031\n\npath_regex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013quer" +
+      "y_regex\030\003 \001(\tB\005\230\246\035\377\005\032\217\001\n\023FeatureBoostPat" +
+      "tern\022\030\n\tsubdomain\030\001 \001(\tB\005\230\246\035\377\005\022\031\n\npath_r",
+      "egex\030\002 \001(\tB\005\230\246\035\377\005\022\032\n\013query_regex\030\003 \001(\tB\005" +
+      "\230\246\035\377\005\022\022\n\nfeature_id\030\004 \001(\005\022\023\n\005boost\030\005 \001(\005" +
+      "B\004\210\246\035\001\"\314\002\n\020TestInstructions\022B\n\024url_white" +
+      "list_checks\030\001 \001(\0132$.TestInstructions.Url" +
+      "WhitelistChecks\022U\n\033article_url_detector_" +
+      "checks\030\002 \001(\0132*.TestInstructions.ArticleU" +
+      "rlDetectorChecksB\004\210\246\035\001\032E\n\022UrlWhitelistCh" +
+      "ecks\022\027\n\010good_url\030\001 \003(\tB\005\230\246\035\377\005\022\026\n\007bad_url" +
+      "\030\002 \003(\tB\005\230\246\035\377\005\032V\n\030ArticleUrlDetectorCheck" +
+      "s\022\032\n\013article_url\030\001 \003(\tB\005\230\246\035\377\005\022\036\n\017non_art",
+      "icle_url\030\002 \003(\tB\005\230\246\035\377\005\"\341\002\n\014CrawlHistory\022\"" +
+      "\n\010crawl_id\030\001 \001(\tB\020\210\246\035\001\220\246\035\002\230\246\035\030\250\246\035\001\022\027\n\004ho" +
+      "st\030\002 \001(\tB\t\210\246\035\001\230\246\035\200\002\022 \n\004site\030\003 \003(\0132\022.Craw" +
+      "lHistory.Site\022\030\n\nstart_time\030\004 \001(\003B\004\210\246\035\001\022" +
+      "\020\n\010end_time\030\005 \001(\003\022\016\n\006millis\030\006 \001(\003\022\027\n\017was" +
+      "_interrupted\030\007 \001(\010\032\202\001\n\004Site\022\036\n\013root_doma" +
+      "in\030\001 \001(\tB\t\210\246\035\001\230\246\035\377\005\022\030\n\nstart_time\030\002 \001(\003B" +
+      "\004\210\246\035\001\022\020\n\010end_time\030\003 \001(\003\022\016\n\006millis\030\004 \001(\003\022" +
+      "\036\n\020articles_crawled\030\005 \001(\005B\004\210\246\035\001:\030\212\265\030\024Mon" +
+      "goDB.CrawlHistoryB$\n\024com.janknspank.prot",
+      "oB\014CrawlerProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12586,7 +12586,6 @@ public final class CrawlerProto {
           registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
-          registry.add(com.janknspank.database.ExtensionsProto.required);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);
           registry.add(com.janknspank.database.ExtensionsProto.stringLength);

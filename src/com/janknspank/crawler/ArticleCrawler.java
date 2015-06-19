@@ -166,8 +166,6 @@ public class ArticleCrawler implements Callable<Void> {
   public static Article crawl(Url url, boolean retain)
       throws FetchException, RequiredFieldException, DatabaseSchemaException,
           DatabaseRequestException, BiznessException {
-    System.err.println("Crawling: " + url.getUrl());
-
     @SuppressWarnings("unused")
     Set<String> urls;
 

@@ -1,5 +1,6 @@
 package com.janknspank.crawler;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,41 @@ import com.janknspank.proto.ArticleProto.Article;
 import com.janknspank.proto.CrawlerProto.SiteManifest;
 import com.janknspank.proto.CrawlerProto.SiteManifest.ParagraphBlacklist;
 
+import de.jetwick.snacktory.ArticleTextExtractor;
+
 public class ParagraphFinder {
+  private static final Extractor EXTRACTOR = new Extractor();
+  private static class Extractor extends ArticleTextExtractor {
+    public Elements extractParagraphs(Document doc) {
+      prepareDocument(doc);
+
+      // Initialize elements.
+      Collection<Element> nodes = getNodes(doc);
+      int maxWeight = 0;
+      Element bestMatchElement = null;
+      for (Element entry : nodes) {
+        int currentWeight = getWeight(entry);
+        if (currentWeight > maxWeight) {
+          maxWeight = currentWeight;
+          bestMatchElement = entry;
+          if (maxWeight > 200) {
+            break;
+          }
+        }
+      }
+
+      Elements elements = new Elements();
+      if (bestMatchElement != null) {
+        for (Element element : bestMatchElement.select("p")) {
+          if (element.hasText()) {
+            elements.add(element);
+          }
+        }
+      }
+      return elements;
+    }
+  }
+
   private static final int MAX_PARAGRAPH_LENGTH =
       Database.getStringLength(Article.class, "paragraph");
   private static final ParagraphCache PARAGRAPH_CACHE = new ParagraphCache();
@@ -173,6 +208,9 @@ public class ParagraphFinder {
   }
 
   public static boolean isParagraphElOkay(Element element, SiteManifest site, int offset) {
+    if (site == null) {
+      return true;
+    }
     if (element.childNodeSize() == 0) {
       return false;
     }
@@ -237,16 +275,22 @@ public class ParagraphFinder {
       return PARAGRAPH_NODE_CACHE.getParagraphEls(document.baseUri());
     }
 
-    SiteManifest site = SiteManifests.getForUrl(document.baseUri());
-    if (site == null) {
-      throw new IllegalStateException("Site not supported for URL " + document.baseUri());
-    }
-
     Elements paragraphEls = new Elements();
-    for (String paragraphSelector : site.getParagraphSelectorList()) {
-      paragraphEls.addAll(document.select(paragraphSelector));
+    SiteManifest site = SiteManifests.getForUrl(document.baseUri());
+    if (site != null) {
+      for (String paragraphSelector : site.getParagraphSelectorList()) {
+        paragraphEls.addAll(document.select(paragraphSelector));
+      }
     }
-    paragraphEls = sortAndDedupe(paragraphEls);
+    if (paragraphEls.isEmpty()) {
+      // Fail-over to Snacktory's paragraph detection algorithm, which tries to
+      // find non-trivial text nodes and then identify them as paragraphs, if
+      // the manifest has no paragraph selectors or the paragraph selectors from
+      // the manifest identified no paragraphs.
+      paragraphEls.addAll(EXTRACTOR.extractParagraphs(document));
+    } else {
+      paragraphEls = sortAndDedupe(paragraphEls);
+    }
 
     // Filter through various checks (blacklists, etc).
     Elements okayParagraphEls = new Elements();

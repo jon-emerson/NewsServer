@@ -4,9 +4,6 @@ start_url: "http://www.farms.com/news/"
 path_blacklist {
   needle: "/agday/"
 }
-paragraph_selector: ".ContentCotainer p"
-paragraph_selector: ".tableBorderthin p"
-paragraph_selector: ".contentpane td.tblfix > div"
 article_url_pattern {
   path_regex: "^\\/(news|commentaries)\\/.*-[0-9]{4,7}\\.aspx$"
 }

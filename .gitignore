@@ -5,9 +5,7 @@
 /build
 /data
 /dbpedia
-/dist
 /lib
-/newrelic/logs/**
 /rawdata/angellist
 /target
 /.eclipsebin
