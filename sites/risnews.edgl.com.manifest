@@ -2,7 +2,7 @@ short_name: "RIS News"
 root_domain: "risnews.edgl.com"
 start_url: "http://risnews.edgl.com/home"
 start_url: "http://risnews.edgl.com/retail-news"
-paragraph_selector: "#article-detail p"
+paragraph_selector: "#article-detail"
 article_url_pattern {
   path_regex: "[^\\/]+[0-9]{5,}$"
 }

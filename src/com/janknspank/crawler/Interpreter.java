@@ -14,8 +14,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
-import com.google.api.client.util.Lists;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.janknspank.database.Database;
 import com.janknspank.fetch.FetchException;
@@ -72,7 +72,56 @@ public class Interpreter {
     }
   }
 
+  /**
+   * Returns the deepest common element between the passed two Elements.  The
+   * common element may be one of the passed elements.
+   */
+  private static Element getCommonParent(Element e1, Element e2) {
+    List<Element> e1parents = Lists.newArrayList();
+    e1parents.addAll(Lists.reverse(e1.parents()));
+    e1parents.add(e1);
+
+    List<Element> e2parents = Lists.newArrayList();
+    e2parents.addAll(Lists.reverse(e2.parents()));
+    e1parents.add(e2);
+
+    Element lastElement = null;
+    for (int i = 0; ; i++) {
+      if (i >= e1parents.size()
+          || i >= e2parents.size()
+          || !e1parents.get(i).equals(e2parents.get(i))) {
+        break;
+      }
+      lastElement = e1parents.get(i);
+    }
+    return lastElement;
+  }
+
+  /**
+   * Returns the Element that contents all the Document's paragraph elements.
+   * This can be seen as the containing element for the article contents.
+   */
+  private static Element getCommonParagraphElement(Document document) {
+    try {
+      List<Element> paragraphEls = ParagraphFinder.getParagraphEls(document);
+      Element commonEl = Iterables.getFirst(paragraphEls, null);
+      for (Element paragraphEl : Iterables.skip(paragraphEls, 1)) {
+        commonEl = getCommonParent(commonEl, paragraphEl);
+      }
+      return commonEl;
+    } catch (RequiredFieldException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * Returns linked, iframed, and <video>ed videos for the passed article.
+   * @param document the article
+   * @param urls hyperlinked URLs in the body of the article
+   */
   private static Iterable<Video> getVideos(Document document, Iterable<String> urls) {
+    Element commonParagraphElement = getCommonParagraphElement(document);
     Set<String> youTubeIdsSoFar = Sets.newHashSet();
     List<Video> videos = Lists.newArrayList();
 
@@ -92,7 +141,7 @@ public class Interpreter {
     }
 
     // Find embedded YouTube videos.
-    for (Element iframeEl : document.select("body iframe[src]")) {
+    for (Element iframeEl : commonParagraphElement.select("iframe[src]")) {
       String src = iframeEl.attr("src");
       Matcher matcher = YOUTUBE_EMBED_URL_PATTERN.matcher(src);
       if (matcher.find()) {
@@ -116,7 +165,7 @@ public class Interpreter {
     }
 
     // Find HTML5 videos.
-    for (Element videoEl : document.select("body video")) {
+    for (Element videoEl : commonParagraphElement.select("video")) {
       String width = videoEl.attr("width");
       String height = videoEl.attr("height");
       for (Node sourceEl : videoEl.select("source[src]")) {
