@@ -13,7 +13,7 @@ public class EntityCache {
       new LinkedHashMap<String, Entity>() {
         @Override
         protected boolean removeEldestEntry(Map.Entry<String, Entity> eldest) {
-          return size() > 2500;
+          return size() > 500;
         }
       };
   private static final Object SYNCHRONIZE_HELPER = new Object();
