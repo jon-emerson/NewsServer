@@ -325,12 +325,19 @@ a.btn-primary,
   float: left;
   font-size: 18px;
   max-width: 340px;
-  margin: 6px 0 12px 0;
+  margin: -12px 0 12px 0;
 }
 
 .footer-p small {
   font-size: 12px;
   opacity: 0.5;
+}
+
+.footer-p .apple-legal {
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.5;
+  line-height: 14px;
 }
 
 .mobile-brand-wrapper {
