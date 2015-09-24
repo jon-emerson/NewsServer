@@ -260,7 +260,8 @@ public class Articles {
     TopList<Article, Double> bestArticles = new TopList<>(limit + 5);
     for (Article article : dedupedArticles) {
       SocialEngagement engagement = SocialEngagements.getForArticle(article, Site.TWITTER);
-      bestArticles.add(article, article.getScore() * (1 + engagement.getShareScore()));
+      double shareScore = (engagement == null) ? 0.5 : engagement.getShareScore();
+      bestArticles.add(article, article.getScore() * (1 + shareScore));
     }
 
     // Now that we know which articles to keep, sort them how we've historically
